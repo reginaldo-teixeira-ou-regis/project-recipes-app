@@ -1,7 +1,10 @@
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 function FormLogin() {
   const [login, setLogin] = useState({ email: '', password: '' });
+  const history = useHistory();
   const MIN_PASSWORD = 6;
   const regex = /\S+@\S+\.\S+/;
   const KEY = 'user';
@@ -19,6 +22,7 @@ function FormLogin() {
 
   const handleSumit = () => {
     saveLocalStorage(login.email);
+    history.push('/meals');
   };
 
   return (
@@ -55,5 +59,11 @@ function FormLogin() {
     </form>
   );
 }
+
+FormLogin.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default FormLogin;
