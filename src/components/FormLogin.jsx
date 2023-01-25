@@ -4,11 +4,21 @@ function FormLogin() {
   const [login, setLogin] = useState({ email: '', password: '' });
   const MIN_PASSWORD = 6;
   const regex = /\S+@\S+\.\S+/;
+  const KEY = 'user';
   const handleChange = (event) => {
     setLogin({
       ...login,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const saveLocalStorage = (email) => {
+    const emailJson = JSON.stringify({ email });
+    localStorage.setItem(KEY, emailJson);
+  };
+
+  const handleSumit = () => {
+    saveLocalStorage(login.email);
   };
 
   return (
@@ -38,6 +48,7 @@ function FormLogin() {
         type="button"
         data-testid="login-submit-btn"
         disabled={ login.password.length <= MIN_PASSWORD || !(regex.test(login.email)) }
+        onClick={ handleSumit }
       >
         Enter
       </button>
