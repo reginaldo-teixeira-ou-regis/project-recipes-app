@@ -1,9 +1,14 @@
 import React from 'react';
-import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 function Profile() {
   return (
-    <Footer />
+    <div>
+      <Header
+        title="Profile"
+      />
+    </div>
   );
 }
+
 export default Profile;

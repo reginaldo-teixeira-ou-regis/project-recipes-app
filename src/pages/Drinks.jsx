@@ -1,9 +1,16 @@
 import React from 'react';
-import Footer from '../components/Footer';
+import Header from '../components/Header';
 
 function Drinks() {
+  const HasTheSearch = true;
   return (
-    <Footer />
+    <div>
+      <Header
+        title="Drinks"
+        HasTheSearch={ HasTheSearch }
+      />
+    </div>
   );
 }
+
 export default Drinks;

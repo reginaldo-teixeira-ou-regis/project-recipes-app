@@ -1,11 +1,16 @@
 import React from 'react';
-import Footer from '../components/Footer';
+import Header from '../components/Header';
 
-export default function aaa() {
+function Meals() {
+  const HasTheSearch = true;
   return (
     <div>
-      <h1>aaa</h1>
-      <Footer />
+      <Header
+        title="Meals"
+        HasTheSearch={ HasTheSearch }
+      />
     </div>
   );
 }
+
+export default Meals;
