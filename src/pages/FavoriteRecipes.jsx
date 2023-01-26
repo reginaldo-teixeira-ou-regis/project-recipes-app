@@ -1,16 +1,12 @@
 import React from 'react';
 import Header from '../components/Header';
 
-function Meals() {
-  const HasTheSearch = true;
+export default function FavoriteRecipes() {
   return (
     <div>
       <Header
-        title="Meals"
-        HasTheSearch={ HasTheSearch }
+        title="Favorite Recipes"
       />
     </div>
   );
 }
-
-export default Meals;
