@@ -1,11 +1,9 @@
 import React from 'react';
 import Footer from '../components/Footer';
 
-export default function aaa() {
+function Drinks() {
   return (
-    <div>
-      <h1>aaa</h1>
-      <Footer />
-    </div>
+    <Footer />
   );
 }
+export default Drinks;
