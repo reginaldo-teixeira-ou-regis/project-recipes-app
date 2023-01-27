@@ -3,22 +3,11 @@ import { SearchBarContext } from '../context/SearchBarProvider';
 
 function SearchBar() {
   const {
-    search,
-    setSearch,
     radios,
     setRadios,
     handleClick } = useContext(SearchBarContext);
   return (
     <form>
-      <label htmlFor="searchBar">
-        <input
-          name="searchBar"
-          data-testid="search-input"
-          type="text"
-          value={ search }
-          onChange={ (e) => setSearch(e.target.value) }
-        />
-      </label>
       <label htmlFor="ingredient">
         <input
           name="ingredient"
@@ -52,7 +41,7 @@ function SearchBar() {
           checked={ radios === 'first letter' }
           onChange={ (e) => setRadios(e.target.value) }
         />
-        Frist letter
+        First letter
       </label>
       <button
         type="button"
