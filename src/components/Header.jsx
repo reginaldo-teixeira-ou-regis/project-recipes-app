@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import { SearchBarContext } from '../context/SearchBarProvider';
+import { SearchBar } from './SearchBar';
 
 function Header({ title, HasTheSearch }) {
   const [searchBar, setSearchBar] = useState(false);
   const { search, setSearch } = useContext(SearchBarContext);
-
   const changeSearch = () => {
     if (searchBar === true) {
       setSearchBar(false);
@@ -16,7 +16,6 @@ function Header({ title, HasTheSearch }) {
       setSearchBar(true);
     }
   };
-
   return (
     <header>
       <Link to="/profile">
@@ -46,14 +45,12 @@ function Header({ title, HasTheSearch }) {
         {' '}
         { title }
       </h1>
+      <SearchBar />
     </header>
-
   );
 }
-
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   HasTheSearch: PropTypes.bool.isRequired,
 };
-
 export default Header;
