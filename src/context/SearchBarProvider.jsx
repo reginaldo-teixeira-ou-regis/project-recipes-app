@@ -29,7 +29,7 @@ function SearchBarProvider({ children }) {
     setSearch,
     radios,
     setRadios,
-    handleClick
+    handleClick,
   }), [search, radios]);
   return (
     <SearchBarContext.Provider value={ values }>
