@@ -30,6 +30,7 @@ function SearchBarProvider({ children }) {
     radios,
     setRadios,
     handleClick,
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }), [search, radios]);
   return (
     <SearchBarContext.Provider value={ values }>
