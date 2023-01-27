@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchBar from '../components/SearchBar';
 
-export default function aaa() {
+export default function Recipes() {
   return (
     <SearchBar />
   );

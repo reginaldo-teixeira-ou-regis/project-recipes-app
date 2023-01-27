@@ -1,52 +1,60 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { SearchBarContext } from '../context/SearchBarProvider';
 
 function SearchBar() {
+  const { search, setSearch, radios, setRadios } = useContext(SearchBarContext);
   return (
     <form>
       <label htmlFor="searchBar">
-        Ingredient
         <input
           name="searchBar"
           data-testid="search-input"
           type="text"
+          value={ search }
+          onChange={ (e) => setSearch(e.target.value) }
         />
       </label>
       <label htmlFor="ingredient">
-        Ingredient
         <input
           name="ingredient"
           data-testid="ingredient-search-radio"
           type="radio"
+          value="ingredient"
+          checked={ radios === 'ingredient' }
+          onChange={ (e) => setRadios(e.target.value) }
         />
+        {' '}
+        Ingredient
       </label>
       <label htmlFor="name">
-        Name
         <input
           name="name"
           data-testid="name-search-radio"
           type="radio"
+          value="name"
+          checked={ radios === 'name' }
+          onChange={ (e) => setRadios(e.target.value) }
         />
+        {' '}
+        Name
       </label>
-      <label htmlFor="frist-letter">
-        Frist letter
+      <label htmlFor="first-letter">
         <input
-          name="frist-letter"
+          name="first-letter"
           data-testid="first-letter-search-radio"
           type="radio"
+          value="first letter"
+          checked={ radios === 'first letter' }
+          onChange={ (e) => setRadios(e.target.value) }
         />
+        Frist letter
       </label>
       <button
         type="button"
         data-testid="exec-search-btn"
+        onClick={ () => {} }
       >
         Pesquisar
-      </button>
-      <button
-      // ainda n sei o motivo da existencia desse botaõ
-        type="button"
-        data-testid="search-top-btn"
-      >
-        Sla;-;
       </button>
     </form>
   );

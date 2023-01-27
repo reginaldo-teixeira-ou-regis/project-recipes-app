@@ -1,18 +1,19 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+import SearchBarProvider from './context/SearchBarProvider';
 import Login from './pages/Login';
-import Meals from './pages/Meals';
+import Recipes from './pages/Recipes';
 
 function App() {
   return (
-    <BrowserRouter>
+    <SearchBarProvider>
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route exact path="/meals" component={ Meals } />
+        <Route exact path="/meals" component={ Recipes } />
       </Switch>
-    </BrowserRouter>
+    </SearchBarProvider>
   );
 }
 
