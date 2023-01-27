@@ -3,27 +3,27 @@ import PropTypes from 'prop-types';
 import useFetch from '../hooks/usefetch';
 
 export const SearchBarContext = createContext();
-
 function SearchBarProvider({ children }) {
   const [search, setSearch] = useState('');
   const [radios, setRadios] = useState('ingredient');
-  const [url, setUrl] = useState('');
+  // const [url, setUrl] = useState('');
   const { makeFetch } = useFetch();
-
-  const handleClick = () => {
+  const handleClick = async () => {
     switch (radios) {
     case 'ingredient':
-      return setUrl(`ttps://www.themealdb.com/api/json/v1/1/filter.php?i=${search}`);
+      await makeFetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${search}`);
+      break;
     case 'Name':
-      return setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`);
+      await makeFetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${search}`);
+      break;
     case 'First letter':
-      return setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?f=${search}`);
+      await makeFetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${search}`);
+      break;
     default:
       break;
     }
-    const requestApi = makeFetch(url);
-    console.log(requestApi);
   };
+  console.log(handleClick);
   const values = useMemo(() => ({
     search,
     setSearch,
@@ -38,7 +38,5 @@ function SearchBarProvider({ children }) {
     </SearchBarContext.Provider>
   );
 }
-
 SearchBarProvider.propTypes = { children: PropTypes.instanceOf(Object).isRequired };
-
 export default SearchBarProvider;

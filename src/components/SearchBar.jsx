@@ -1,11 +1,8 @@
 import React, { useContext } from 'react';
 import { SearchBarContext } from '../context/SearchBarProvider';
 
-function SearchBar() {
-  const {
-    radios,
-    setRadios,
-    handleClick } = useContext(SearchBarContext);
+export function SearchBar() {
+  const { radios, setRadios, handleClick } = useContext(SearchBarContext);
   return (
     <form>
       <label htmlFor="ingredient">
@@ -17,7 +14,6 @@ function SearchBar() {
           checked={ radios === 'ingredient' }
           onChange={ (e) => setRadios(e.target.value) }
         />
-        {' '}
         Ingredient
       </label>
       <label htmlFor="name">
@@ -29,7 +25,6 @@ function SearchBar() {
           checked={ radios === 'name' }
           onChange={ (e) => setRadios(e.target.value) }
         />
-        {' '}
         Name
       </label>
       <label htmlFor="first-letter">
@@ -45,7 +40,7 @@ function SearchBar() {
       </label>
       <button
         type="button"
-        data-testid="search-top-btn"
+        data-testid="exec-search-btn"
         onClick={ handleClick }
       >
         Pesquisar
@@ -53,5 +48,3 @@ function SearchBar() {
     </form>
   );
 }
-
-export default SearchBar;
