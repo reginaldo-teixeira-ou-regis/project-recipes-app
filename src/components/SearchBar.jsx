@@ -2,7 +2,12 @@ import React, { useContext } from 'react';
 import { SearchBarContext } from '../context/SearchBarProvider';
 
 function SearchBar() {
-  const { search, setSearch, radios, setRadios } = useContext(SearchBarContext);
+  const {
+    search,
+    setSearch,
+    radios,
+    setRadios,
+    handleClick } = useContext(SearchBarContext);
   return (
     <form>
       <label htmlFor="searchBar">
@@ -51,8 +56,8 @@ function SearchBar() {
       </label>
       <button
         type="button"
-        data-testid="exec-search-btn"
-        onClick={ () => {} }
+        data-testid="search-top-btn"
+        onClick={ handleClick }
       >
         Pesquisar
       </button>
