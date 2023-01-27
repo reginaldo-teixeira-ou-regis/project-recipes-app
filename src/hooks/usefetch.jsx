@@ -6,7 +6,7 @@ function useFetch() {
     try {
       setIsLoading(true);
       const response = await fetch(url);
-      const json = response.json();
+      const json = await response.json();
       return json;
     } catch (err) {
       return err;
