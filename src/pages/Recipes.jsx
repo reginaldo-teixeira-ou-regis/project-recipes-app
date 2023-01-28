@@ -2,7 +2,7 @@ import React from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
-function Meals() {
+function Recipes() {
   const HasTheSearch = true;
   return (
     <div>
@@ -15,4 +15,4 @@ function Meals() {
   );
 }
 
-export default Meals;
+export default Recipes;
