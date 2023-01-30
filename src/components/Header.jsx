@@ -7,7 +7,6 @@ import SearchBar from './SearchBar';
 
 function Header({ title, HasTheSearch }) {
   const [searchBar, setSearchBar] = useState(false);
-
   const changeSearch = () => {
     if (searchBar === true) {
       setSearchBar(false);

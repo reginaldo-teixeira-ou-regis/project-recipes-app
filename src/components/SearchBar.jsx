@@ -1,8 +1,20 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 
 export default function SearchBar() {
-  const { handleChange, searchSelected, handleClick } = useContext(AppContext);
+  const { handleChange, searchSelected, mealsAPI,
+    drinksAPI } = useContext(AppContext);
+  const history = useHistory();
+
+  const requestApiByTitl = () => {
+    if (history.location.pathname === '/meals') {
+      mealsAPI();
+    }
+    if (history.location.pathname === '/drinks') {
+      drinksAPI();
+    }
+  };
 
   return (
     <form>
@@ -55,7 +67,7 @@ export default function SearchBar() {
         <button
           type="button"
           data-testid="exec-search-btn"
-          onClick={ handleClick }
+          onClick={ () => requestApiByTitl() }
         >
           Search
         </button>

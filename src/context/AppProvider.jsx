@@ -12,7 +12,7 @@ function AppProvider({ children }) {
     setSearchSelected({ ...searchSelected, [name]: value });
   };
 
-  const handleClick = () => {
+  const mealsAPI = () => {
     if (searchSelected.searchSelected === 'ingredient') {
       makeFetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchSelected.typeSearch}`);
     } else if (searchSelected.searchSelected === 'name') {
@@ -23,6 +23,28 @@ function AppProvider({ children }) {
       makeFetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${searchSelected.typeSearch}`);
     }
   };
+
+  const drinksAPI = () => {
+    if (searchSelected.searchSelected === 'ingredient') {
+      makeFetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${searchSelected.typeSearch}`);
+    } else if (searchSelected.searchSelected === 'name') {
+      makeFetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchSelected.typeSearch}`);
+    } else if (searchSelected.typeSearch.length > 1) {
+      global.alert('Your search must have only 1 (one) character');
+    } else {
+      makeFetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${searchSelected.typeSearch}`);
+    }
+  };
+
+  // const requestApiByTitle = (drinkOrMeals) => {
+  // if (drinkOrMeals === 'Meals') {
+  //   mealsAPI();
+  // }
+  // if (drinkOrMeals === 'Drinks') {
+  //   drinksAPI();
+  // }
+  // };
+
   //   useEffect(() => {
   //     const responseApi = async (url) => {
   //       const resposta = await makeFetch(url);
@@ -33,7 +55,8 @@ function AppProvider({ children }) {
   const values = useMemo(() => ({
     searchSelected,
     handleChange,
-    handleClick,
+    mealsAPI,
+    drinksAPI,
     errors,
     isLoading,
   }), [searchSelected]);
