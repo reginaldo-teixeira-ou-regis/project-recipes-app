@@ -22,6 +22,7 @@ function RecipesCards() {
       }
     };
     fetch();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -45,6 +46,9 @@ function RecipesCards() {
                 {element.strMeal}
 
               </p>
+              <button type="button" data-testid={`${categoryName}-category-filter`}
+              onClick={ () => }
+              />
             </li>
           )
         ))
@@ -66,6 +70,7 @@ function RecipesCards() {
                 {element.strDrink}
 
               </p>
+              <button type="button" data-testid={ `${categoryName}-category-filter` } />
             </li>
           )
         ))}
