@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 
 function RecipesCards() {
@@ -34,7 +34,66 @@ function RecipesCards() {
     fetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  const handleClick = async (id) => {
+    if (history.location.pathname === '/meals') {
+      const meals = await makeFetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${id}`);
+      const filteredMeals = meals.meals;
+      console.log(filteredMeals);
+      return filteredMeals.map((element, index) => (
+        index < magicNumber12 && (
+          <li
+            key={ element.idMeal }
+            data-testid={ `${index}-recipe-card` }
+          >
+            <Link to={ `/meals/${element.idMeal}` }>
+              <img
+                key={ element.idMeal }
+                alt={ element.strMeal }
+                data-testid={ `${index}-card-img` }
+                src={ element.strMealThumb }
+                style={ { width: '100px' } }
+              />
+              <p
+                key={ element.idMeal }
+                data-testid={ `${index}-card-name` }
+              >
+                {element.strMeal}
+              </p>
+            </Link>
+          </li>
+        )
+      ));
+    }
+    if (history.location.pathname === '/drinks') {
+      const drinks = await makeFetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${id}`);
+      const filteredDrinks = drinks.drinks;
+      console.log(filteredDrinks);
+      return filteredDrinks.map((element, index) => (
+        index < magicNumber12 && (
+          <li
+            key={ element.idDrink }
+            data-testid={ `${index}-recipe-card` }
+          >
+            <Link to={ `/drinks/${element.idDrink}` }>
+              <img
+                key={ element.idDrink }
+                alt={ element.strDrink }
+                data-testid={ `${index}-card-img` }
+                src={ element.strDrinkThumb }
+                style={ { width: '100px' } }
+              />
+              <p
+                key={ element.idDrink }
+                data-testid={ `${index}-card-name` }
+              >
+                {element.strDrink}
+              </p>
+            </Link>
+          </li>
+        )
+      ));
+    }
+  };
   return (
     <div>
       {recipeCategories.map((element, index) => (
@@ -43,7 +102,7 @@ function RecipesCards() {
             key={ element.id }
             type="button"
             data-testid={ `${element.strCategory}-category-filter` }
-            onClick={ () => {} }
+            onClick={ () => handleClick(element.strCategory) }
           >
             {element.strCategory}
 
@@ -54,46 +113,48 @@ function RecipesCards() {
         ? recipeCards.map((element, index) => (
           index < magicNumber12 && (
             <li
-              key={ element.id }
+              key={ element.idMeal }
               data-testid={ `${index}-recipe-card` }
             >
-              <img
-                key={ element.id }
-                alt={ element.strMeal }
-                data-testid={ `${index}-card-img` }
-                src={ element.strMealThumb }
-                style={ { width: '100px' } }
-              />
-              <p
-                key={ element.id }
-                data-testid={ `${index}-card-name` }
-              >
-                {element.strMeal}
-
-              </p>
+              <Link to={ `/meals/${element.idMeal}` }>
+                <img
+                  key={ element.idMeal }
+                  alt={ element.strMeal }
+                  data-testid={ `${index}-card-img` }
+                  src={ element.strMealThumb }
+                  style={ { width: '100px' } }
+                />
+                <p
+                  key={ element.id }
+                  data-testid={ `${index}-card-name` }
+                >
+                  {element.strMeal}
+                </p>
+              </Link>
             </li>
           )
         ))
         : recipeCards.map((element, index) => (
           index < magicNumber12 && (
             <li
-              key={ element.id }
+              key={ element.idDrink }
               data-testid={ `${index}-recipe-card` }
             >
-              <img
-                key={ element.id }
-                alt={ element.strDrink }
-                data-testid={ `${index}-card-img` }
-                src={ element.strDrinkThumb }
-                style={ { width: '100px' } }
-              />
-              <p
-                key={ element.id }
-                data-testid={ `${index}-card-name` }
-              >
-                {element.strDrink}
-
-              </p>
+              <Link to={ `/drinks/${element.idDrink}` }>
+                <img
+                  key={ element.idDrink }
+                  alt={ element.strDrink }
+                  data-testid={ `${index}-card-img` }
+                  src={ element.strDrinkThumb }
+                  style={ { width: '100px' } }
+                />
+                <p
+                  key={ element.idDrink }
+                  data-testid={ `${index}-card-name` }
+                >
+                  {element.strDrink}
+                </p>
+              </Link>
             </li>
           )
         ))}
