@@ -41,7 +41,6 @@ function Header({ title, HasTheSearch }) {
         {' '}
         { title }
       </h1>
-      <SearchBar />
     </header>
   );
 }
