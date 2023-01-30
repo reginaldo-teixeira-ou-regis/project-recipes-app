@@ -1,6 +1,7 @@
 import React from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import RecipesCards from '../components/RecipeCards';
 
 function Recipes() {
   const HasTheSearch = true;
@@ -10,6 +11,7 @@ function Recipes() {
         title="Meals"
         HasTheSearch={ HasTheSearch }
       />
+      <RecipesCards />
       <Footer />
     </div>
   );
