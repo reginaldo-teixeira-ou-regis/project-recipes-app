@@ -6,7 +6,6 @@ export default function SearchBar() {
   const { handleChange, searchSelected, mealsAPI,
     drinksAPI, meals, drinks } = useContext(AppContext);
   const history = useHistory();
-  console.log(meals);
   const requestApiByTitl = async () => {
     if (history.location.pathname === '/meals') {
       mealsAPI();
@@ -27,6 +26,7 @@ export default function SearchBar() {
     }
   }, [meals, drinks]);
 
+  // console.log(recipesFound);
   return (
     <form>
       <input

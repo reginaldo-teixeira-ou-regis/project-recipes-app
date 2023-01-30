@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import AppContext from './AppContext';
 import useFetch from '../hooks/useFetch';
 
 function AppProvider({ children }) {
   const [searchSelected, setSearchSelected] = useState({ typeSearch: '' });
+  const [recipesFound, setRecipesFound] = useState([]);
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const { errors, isLoading, makeFetch } = useFetch();
@@ -54,12 +55,14 @@ function AppProvider({ children }) {
   // }
   // };
 
-  //   useEffect(() => {
-  //     const responseApi = async (url) => {
-  //       const resposta = await makeFetch(url);
-  //     };
-  //     responseApi(url);
-  //   }, []);
+  useEffect(() => {
+    if (meals.length > 1) {
+      setRecipesFound(meals);
+    }
+    if (drinks.length > 1) {
+      setRecipesFound(drinks);
+    }
+  }, [meals, drinks, recipesFound]);
 
   const values = useMemo(() => ({
     searchSelected,
@@ -70,7 +73,8 @@ function AppProvider({ children }) {
     isLoading,
     meals,
     drinks,
-  }), [searchSelected, meals, drinks]);
+    recipesFound,
+  }), [searchSelected, meals, drinks, recipesFound]);
 
   return (
     <AppContext.Provider value={ values }>
