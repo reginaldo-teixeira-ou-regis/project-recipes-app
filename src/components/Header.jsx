@@ -14,7 +14,6 @@ function Header({ title, HasTheSearch }) {
       setSearchBar(true);
     }
   };
-
   return (
     <header>
       <Link to="/profile">
@@ -42,14 +41,12 @@ function Header({ title, HasTheSearch }) {
         {' '}
         { title }
       </h1>
+      <SearchBar />
     </header>
-
   );
 }
-
 Header.propTypes = {
   title: PropTypes.string.isRequired,
   HasTheSearch: PropTypes.bool.isRequired,
 };
-
 export default Header;
