@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import SearchBar from '../components/SearchBar';
 
 function Drinks() {
   const HasTheSearch = true;
@@ -11,7 +10,6 @@ function Drinks() {
         title="Drinks"
         HasTheSearch={ HasTheSearch }
       />
-      <SearchBar />
       <Footer />
     </div>
   );

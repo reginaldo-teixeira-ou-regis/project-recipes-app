@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 
 export default function SearchBar() {
   const { handleChange, searchSelected, mealsAPI,
-    drinksAPI } = useContext(AppContext);
+    drinksAPI, meals, drinks } = useContext(AppContext);
   const history = useHistory();
-
-  const requestApiByTitl = () => {
+  console.log(meals);
+  const requestApiByTitl = async () => {
     if (history.location.pathname === '/meals') {
       mealsAPI();
     }
@@ -15,6 +15,17 @@ export default function SearchBar() {
       drinksAPI();
     }
   };
+
+  useEffect(() => {
+    if (meals.length === 1) {
+      const idMeals = meals[0].idMeal;
+      history.push(`/meals/${idMeals}`);
+    }
+    if (drinks.length === 1) {
+      const idDrinks = drinks[0].idDrink;
+      history.push(`/drinks/${idDrinks}`);
+    }
+  }, [meals, drinks]);
 
   return (
     <form>
