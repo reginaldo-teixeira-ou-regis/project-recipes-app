@@ -1,50 +1,77 @@
 import React, { useContext } from 'react';
-import { SearchBarContext } from '../context/SearchBarProvider';
+import { useHistory } from 'react-router-dom';
+import AppContext from '../context/AppContext';
 
-export function SearchBar() {
-  const { radios, setRadios, handleClick } = useContext(SearchBarContext);
+export default function SearchBar() {
+  const { handleChange, searchSelected, mealsAPI,
+    drinksAPI } = useContext(AppContext);
+  const history = useHistory();
+
+  const requestApiByTitl = () => {
+    if (history.location.pathname === '/meals') {
+      mealsAPI();
+    }
+    if (history.location.pathname === '/drinks') {
+      drinksAPI();
+    }
+  };
+
   return (
     <form>
-      <label htmlFor="ingredient">
-        <input
-          name="ingredient"
-          data-testid="ingredient-search-radio"
-          type="radio"
-          value="ingredient"
-          checked={ radios === 'ingredient' }
-          onChange={ (e) => setRadios(e.target.value) }
-        />
-        Ingredient
-      </label>
-      <label htmlFor="name">
-        <input
-          name="name"
-          data-testid="name-search-radio"
-          type="radio"
-          value="name"
-          checked={ radios === 'name' }
-          onChange={ (e) => setRadios(e.target.value) }
-        />
-        Name
-      </label>
-      <label htmlFor="first-letter">
-        <input
-          name="first-letter"
-          data-testid="first-letter-search-radio"
-          type="radio"
-          value="first letter"
-          checked={ radios === 'first letter' }
-          onChange={ (e) => setRadios(e.target.value) }
-        />
-        First letter
-      </label>
-      <button
-        type="button"
-        data-testid="exec-search-btn"
-        onClick={ handleClick }
-      >
-        Pesquisar
-      </button>
+      <input
+        type="text"
+        placeholder="Search"
+        name="typeSearch"
+        data-testid="search-input"
+        onChange={ handleChange }
+        value={ searchSelected.typeSearch }
+      />
+      <div>
+        <label htmlFor="ingredient">
+          Ingredients
+          <input
+            type="radio"
+            data-testid="ingredient-search-radio"
+            name="searchSelected"
+            id="ingredient"
+            value="ingredient"
+            onChange={ handleChange }
+          />
+        </label>
+
+        <label htmlFor="name">
+          Name
+          <input
+            type="radio"
+            data-testid="name-search-radio"
+            name="searchSelected"
+            id="name"
+            value="name"
+            onChange={ handleChange }
+          />
+        </label>
+
+        <label htmlFor="First letter">
+          First Letter
+          <input
+            type="radio"
+            data-testid="first-letter-search-radio"
+            name="searchSelected"
+            id="First letter"
+            value="letter"
+            onChange={ handleChange }
+          />
+        </label>
+      </div>
+      <div>
+        <button
+          type="button"
+          data-testid="exec-search-btn"
+          onClick={ () => requestApiByTitl() }
+        >
+          Search
+        </button>
+      </div>
     </form>
   );
 }

@@ -3,7 +3,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 
-export default function Recipes() {
+function Recipes() {
   const HasTheSearch = true;
   return (
     <div>
@@ -16,3 +16,5 @@ export default function Recipes() {
     </div>
   );
 }
+
+export default Recipes;
