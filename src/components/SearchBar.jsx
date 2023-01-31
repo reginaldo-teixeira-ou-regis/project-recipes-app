@@ -16,13 +16,12 @@ export default function SearchBar() {
   };
 
   useEffect(() => {
-    const verificaLength = async () => {
-      console.log(meals);
-      if (meals.length === 1) {
+    const verificaLength = () => {
+      if (meals && meals.length === 1) {
         const idMeals = meals[0].idMeal;
         history.push(`/meals/${idMeals}`);
       }
-      if (drinks.length === 1) {
+      if (drinks && drinks.length === 1) {
         const idDrinks = drinks[0].idDrink;
         history.push(`/drinks/${idDrinks}`);
       }

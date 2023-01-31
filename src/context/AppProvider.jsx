@@ -16,40 +16,63 @@ function AppProvider({ children }) {
   };
 
   const mealsAPI = async () => {
+    const alerta = 'Sorry, we haven\'t found any recipes for these filters.';
     if (searchSelected.searchSelected === 'ingredient') {
       const fetchMeals = await makeFetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchSelected.typeSearch}`);
+      console.log(fetchMeals);
+      if (!fetchMeals.meals) {
+        global.alert(alerta);
+      }
       setMeals(fetchMeals.meals);
     } else if (searchSelected.searchSelected === 'name') {
       const fetchMeals = await makeFetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchSelected.typeSearch}`);
+      if (!fetchMeals.meals) {
+        global.alert(alerta);
+      }
       setMeals(fetchMeals.meals);
     } else if (searchSelected.typeSearch.length > 1) {
       global.alert('Your search must have only 1 (one) character');
     } else {
       const fetchMeals = await makeFetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${searchSelected.typeSearch}`);
+      if (fetchMeals.length === 0) {
+        global.alert(alerta);
+      }
       setMeals(fetchMeals.meals);
     }
     // return fetchMeals.meals;
   };
 
   const drinksAPI = async () => {
+    const alerta = 'Sorry, we haven\'t found any recipes for these filters.';
     if (searchSelected.searchSelected === 'ingredient') {
       const fetchDrinks = await makeFetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${searchSelected.typeSearch}`);
+      console.log(fetchDrinks);
+      if (!fetchDrinks.drinks) {
+        global.alert(alerta);
+      }
       setDrinks(fetchDrinks.drinks);
     } else if (searchSelected.searchSelected === 'name') {
       const fetchDrinks = await makeFetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchSelected.typeSearch}`);
+      if (!fetchDrinks.drinks) {
+        global.alert(alerta);
+      }
       setDrinks(fetchDrinks.drinks);
     } else if (searchSelected.typeSearch.length > 1) {
       global.alert('Your search must have only 1 (one) character');
     } else {
       const fetchDrinks = await makeFetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${searchSelected.typeSearch}`);
+      if (!fetchDrinks.drinks) {
+        global.alert(alerta);
+      }
       setDrinks(fetchDrinks.drinks);
     }
   };
 
   useEffect(() => {
-    if (meals.length > 1) {
+    if (meals && meals.length > 1) {
       setRecipesFound(meals);
     }
+
     if (drinks.length > 1) {
       setRecipesFound(drinks);
     }
