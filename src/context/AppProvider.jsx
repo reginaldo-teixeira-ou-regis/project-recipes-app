@@ -24,15 +24,16 @@ function AppProvider({ children }) {
         global.alert(alerta);
       }
       setMeals(fetchMeals.meals);
-    } else if (searchSelected.searchSelected === 'name') {
+    } if (searchSelected.searchSelected === 'name') {
       const fetchMeals = await makeFetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchSelected.typeSearch}`);
       if (!fetchMeals.meals) {
         global.alert(alerta);
       }
       setMeals(fetchMeals.meals);
-    } else if (searchSelected.typeSearch.length > 1) {
+    } if (searchSelected.typeSearch.length > 1
+      && searchSelected.searchSelected === 'letter') {
       global.alert('Your search must have only 1 (one) character');
-    } else {
+    } if (searchSelected.searchSelected === 'letter') {
       const fetchMeals = await makeFetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${searchSelected.typeSearch}`);
       if (fetchMeals.length === 0) {
         global.alert(alerta);
@@ -51,15 +52,16 @@ function AppProvider({ children }) {
         global.alert(alerta);
       }
       setDrinks(fetchDrinks.drinks);
-    } else if (searchSelected.searchSelected === 'name') {
+    } if (searchSelected.searchSelected === 'name') {
       const fetchDrinks = await makeFetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchSelected.typeSearch}`);
       if (!fetchDrinks.drinks) {
         global.alert(alerta);
       }
       setDrinks(fetchDrinks.drinks);
-    } else if (searchSelected.typeSearch.length > 1) {
+    } if (searchSelected.typeSearch.length > 1
+      && searchSelected.searchSelected === 'letter') {
       global.alert('Your search must have only 1 (one) character');
-    } else {
+    } if (searchSelected.searchSelected === 'letter') {
       const fetchDrinks = await makeFetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${searchSelected.typeSearch}`);
       if (!fetchDrinks.drinks) {
         global.alert(alerta);
@@ -73,7 +75,7 @@ function AppProvider({ children }) {
       setRecipesFound(meals);
     }
 
-    if (drinks.length > 1) {
+    if (drinks && drinks.length > 1) {
       setRecipesFound(drinks);
     }
   }, [meals, drinks]);
