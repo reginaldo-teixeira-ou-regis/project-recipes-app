@@ -21,13 +21,15 @@ function RecipeDetails() {
     fetch();
   }, []);
   return (
-    <div>{
+    <div>
+      {<>
         datails.map((el) => (
         <h1 data-testid="recipe-title">{el.}</h1>
         <img data-testid="recipe-photo" src={el.} alt={el} />
         <p data-testid="recipe-category">{el.}</p>
         <p data-testid=`${index}-ingredient-name-and-measure`>{el.}</p>
         <p data-testid="instructions">{el.}</p>
+        </>
     ))}</div>
   );
 }
