@@ -8,6 +8,7 @@ function RecipesCards() {
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [button, setButton] = useState(false);
   const [food, setFood] = useState('');
+  const [sameButton, setSameButton] = useState('');
   const history = useHistory();
   const { makeFetch } = useFetch();
   const magicNumber12 = 12;
@@ -45,12 +46,18 @@ function RecipesCards() {
       const meals = await makeFetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${id}`);
       setFilteredRecipes(meals.meals);
       setFood('Meal');
+      setSameButton(id);
     }
 
     if (history.location.pathname === '/drinks') {
       const drinks = await makeFetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${id}`);
       setFilteredRecipes(drinks.drinks);
       setFood('Drink');
+      setSameButton(id);
+    }
+
+    if (sameButton === id && button) {
+      setButton(false);
     }
   };
 
