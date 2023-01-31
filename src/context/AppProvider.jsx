@@ -45,15 +45,6 @@ function AppProvider({ children }) {
       setDrinks(fetchDrinks.drinks);
     }
   };
-  // console.log(meals);
-  // const requestApiByTitle = (drinkOrMeals) => {
-  // if (drinkOrMeals === 'Meals') {
-  //   mealsAPI();
-  // }
-  // if (drinkOrMeals === 'Drinks') {
-  //   drinksAPI();
-  // }
-  // };
 
   useEffect(() => {
     if (meals.length > 1) {
@@ -62,7 +53,7 @@ function AppProvider({ children }) {
     if (drinks.length > 1) {
       setRecipesFound(drinks);
     }
-  }, [meals, drinks, recipesFound]);
+  }, [meals, drinks]);
 
   const values = useMemo(() => ({
     searchSelected,

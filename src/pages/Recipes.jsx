@@ -7,7 +7,6 @@ function Recipes() {
   const HasTheSearch = true;
   const number = 12;
   const { recipesFound } = useContext(AppContext);
-  console.log(recipesFound);
   return (
     <div>
       <Header

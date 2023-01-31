@@ -8,22 +8,26 @@ export default function SearchBar() {
   const history = useHistory();
   const requestApiByTitl = async () => {
     if (history.location.pathname === '/meals') {
-      mealsAPI();
+      await mealsAPI();
     }
     if (history.location.pathname === '/drinks') {
-      drinksAPI();
+      await drinksAPI();
     }
   };
 
   useEffect(() => {
-    if (meals.length === 1) {
-      const idMeals = meals[0].idMeal;
-      history.push(`/meals/${idMeals}`);
-    }
-    if (drinks.length === 1) {
-      const idDrinks = drinks[0].idDrink;
-      history.push(`/drinks/${idDrinks}`);
-    }
+    const verificaLength = async () => {
+      console.log(meals);
+      if (meals.length === 1) {
+        const idMeals = meals[0].idMeal;
+        history.push(`/meals/${idMeals}`);
+      }
+      if (drinks.length === 1) {
+        const idDrinks = drinks[0].idDrink;
+        history.push(`/drinks/${idDrinks}`);
+      }
+    };
+    verificaLength();
   }, [meals, drinks]);
 
   // console.log(recipesFound);
