@@ -46,8 +46,9 @@ function RecipesCards() {
                 {element.strMeal}
 
               </p>
-              <button type="button" data-testid={`${categoryName}-category-filter`}
-              onClick={ () => }
+              <button
+                type="button"
+                data-testid={ `${element.categoryName}-category-filter` }
               />
             </li>
           )
