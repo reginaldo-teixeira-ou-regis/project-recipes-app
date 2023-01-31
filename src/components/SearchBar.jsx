@@ -1,21 +1,35 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 
 export default function SearchBar() {
   const { handleChange, searchSelected, mealsAPI,
-    drinksAPI } = useContext(AppContext);
+    drinksAPI, meals, drinks } = useContext(AppContext);
   const history = useHistory();
-
-  const requestApiByTitl = () => {
+  const requestApiByTitl = async () => {
     if (history.location.pathname === '/meals') {
-      mealsAPI();
+      await mealsAPI();
     }
     if (history.location.pathname === '/drinks') {
-      drinksAPI();
+      await drinksAPI();
     }
   };
 
+  useEffect(() => {
+    const verificaLength = () => {
+      if (meals && meals.length === 1) {
+        const idMeals = meals[0].idMeal;
+        history.push(`/meals/${idMeals}`);
+      }
+      if (drinks && drinks.length === 1) {
+        const idDrinks = drinks[0].idDrink;
+        history.push(`/drinks/${idDrinks}`);
+      }
+    };
+    verificaLength();
+  }, [meals, drinks]);
+
+  // console.log(recipesFound);
   return (
     <form>
       <input
