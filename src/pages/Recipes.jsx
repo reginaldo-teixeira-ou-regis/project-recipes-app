@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+// import RecipesCards from '../components/RecipeCards';
 import AppContext from '../context/AppContext';
 
 function Recipes() {
@@ -28,6 +29,7 @@ function Recipes() {
           )
         ))
       }
+      {/* <RecipesCards /> */}
       <Footer />
     </div>
   );

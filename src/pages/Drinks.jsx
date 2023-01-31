@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import AppContext from '../context/AppContext';
+// import RecipesCards from '../components/RecipeCards';
 
 function Drinks() {
   const number = 12;
@@ -28,6 +29,7 @@ function Drinks() {
           )
         ))
       }
+      {/* <RecipesCards /> */}
       <Footer />
     </div>
   );
