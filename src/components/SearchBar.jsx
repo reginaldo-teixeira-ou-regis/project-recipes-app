@@ -7,7 +7,6 @@ export default function SearchBar() {
     drinksAPI, meals, drinks } = useContext(AppContext);
   const history = useHistory();
   const requestApiByTitl = async () => {
-    console.log(history);
     if (history.location.pathname === '/meals') {
       await mealsAPI();
     }

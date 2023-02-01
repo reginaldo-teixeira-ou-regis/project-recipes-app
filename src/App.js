@@ -10,6 +10,7 @@ import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import Recipes from './pages/Recipes';
 import RecipeDetails from './pages/RecipeDetails';
+const id =  52771;
 
 // mudei o componente renderizado nas linhas 25 e 26 de login para RecipeDetails
 function App() {
@@ -23,7 +24,7 @@ function App() {
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/done-recipes" component={ DoneRecipes } />
           <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
-          <Route path="/meals/:id-da-receita" component={ RecipeDetails } />
+          <Route path={ `/meals/${id}` } component={ RecipeDetails } />
           <Route path="/drinks/:id-da-receita" component={ RecipeDetails } />
           <Route exact path="/meals/:id-da-receita/in-progress" component={ Login } />
           <Route exact path="/drinks/:id-da-receita/in-progress" component={ Login } />

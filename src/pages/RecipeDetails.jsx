@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useRouteMatch, useHistory } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 
 function RecipeDetails() {
@@ -10,8 +10,8 @@ function RecipeDetails() {
   const history = useHistory();
   const match = useRouteMatch();
   const { location: { pathname } } = history;
-  const { params: { id } } = match;
-
+  // const { params: { id } } = match;
+  const id = 52771;
   useEffect(() => {
     const fetch = async () => {
       if (pathname.includes('/meals')) {
@@ -25,14 +25,15 @@ function RecipeDetails() {
     };
     fetch();
   }, []);
+  console.log(meals);
   return (
     <>
       {(pathname.includes('/meals') && (
         meals.map((el, i) => (
           <div key={ i }>
-            <img src={ el } alt={ el } data-testid="recipe-photo" />
-            <h1 data-testid="recipe-title">{el}</h1>
-            <p data-testid="recipe-category">{el}</p>
+            <img src={ el.strMealThumb } alt={ el.strMeal } data-testid="recipe-photo" />
+            <h1 data-testid="recipe-title">{el.strMeal}</h1>
+            <p data-testid="recipe-category">{el.strCategory}</p>
             <ul data-testid={ `${i}-ingredient-name-and-measure` }>
               <li>{el}</li>
             </ul>
@@ -52,9 +53,13 @@ function RecipeDetails() {
         ))
       ))}
       {(pathname.includes('/drinks') && (
-        drink.map((el, i) => (
+        meals.map((el, i) => (
           <div key={ i }>
-            <img src={ el } alt={ el } data-testid="recipe-photo" />
+            <img
+              src={ el }
+              alt={ el }
+              data-testid="recipe-photo"
+            />
             <h1 data-testid="recipe-title">{el}</h1>
             <p data-testid="recipe-category">{el}</p>
             <ul data-testid={ `${i}-ingredient-name-and-measure` }>
