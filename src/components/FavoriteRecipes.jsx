@@ -6,11 +6,13 @@ const copy = require('clipboard-copy');
 
 export default function FavoriteRecipes() {
   const [itensDoStorage, setItensDoStorage] = useState([]);
+  const [itensDoStorage2, setItensDoStorage2] = useState([]);
   const [mensagem, setMensagem] = useState('');
 
   useEffect(() => {
     const storageRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
     setItensDoStorage(storageRecipes);
+    setItensDoStorage2(storageRecipes);
   }, []);
 
   const copyUrl = (url) => {
@@ -22,26 +24,48 @@ export default function FavoriteRecipes() {
     const storageAtualizado = itensDoStorage.filter((el) => el.id !== e);
     localStorage.setItem('favoriteRecipes', JSON
       .stringify(storageAtualizado));
+    const storageRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    setItensDoStorage(storageRecipes);
+  };
+
+  const filters = (e) => {
+    if (e.target.name === 'Meals') {
+      const arrayFiltrado = itensDoStorage.filter((el) => el.type === 'meal');
+      setItensDoStorage(arrayFiltrado);
+    }
+    if (e.target.name === 'Drinks') {
+      const arrayFiltrado = itensDoStorage.filter((el) => el.type === 'drink');
+      setItensDoStorage(arrayFiltrado);
+    }
+    if (e.target.name === 'All') {
+      setItensDoStorage(itensDoStorage2);
+    }
   };
   return (
     <div>
       <button
+        onClick={ filters }
+        name="All"
         type="button"
         data-testid="filter-by-all-btn"
       >
         All
       </button>
       <button
+        onClick={ filters }
+        name="Meals"
         type="button"
         data-testid="filter-by-meal-btn"
       >
-        Meals
+        Meal
       </button>
       <button
+        onClick={ filters }
+        name="Drinks"
         type="button"
         data-testid="filter-by-drink-btn"
       >
-        Meals
+        Drink
       </button>
       {
         itensDoStorage?.map((e, index) => (
