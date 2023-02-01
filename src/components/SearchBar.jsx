@@ -27,6 +27,7 @@ export default function SearchBar() {
       }
     };
     verificaLength();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [meals, drinks]);
 
   // console.log(recipesFound);
