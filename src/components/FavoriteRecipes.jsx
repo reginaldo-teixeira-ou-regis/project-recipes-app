@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
@@ -8,6 +9,7 @@ export default function FavoriteRecipes() {
   const [itensDoStorage, setItensDoStorage] = useState([]);
   const [itensDoStorage2, setItensDoStorage2] = useState([]);
   const [mensagem, setMensagem] = useState('');
+  const history = useHistory();
 
   useEffect(() => {
     const storageRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -41,6 +43,7 @@ export default function FavoriteRecipes() {
       setItensDoStorage(itensDoStorage2);
     }
   };
+
   return (
     <div>
       <button
@@ -70,14 +73,25 @@ export default function FavoriteRecipes() {
       {
         itensDoStorage?.map((e, index) => (
           <div key={ e.id }>
-            <img
-              data-testid={ `${index}-horizontal-image` }
-              alt={ e.name }
-              src={ e.image }
-              style={ { width: '200px' } }
-            />
+            <button
+              type="button"
+              onClick={ () => history.push(`/${e.type}s/${e.id}`) }
+              style={ { border: 'none', backgroundColor: 'white' } }
+            >
+              <img
+                data-testid={ `${index}-horizontal-image` }
+                alt={ e.name }
+                src={ e.image }
+                style={ { width: '200px' } }
+              />
+              <p
+                data-testid={ `${index}-horizontal-name` }
+              >
+                { e.name }
+              </p>
+
+            </button>
             <p data-testid={ `${index}-horizontal-top-text` }>{ e.category }</p>
-            <p data-testid={ `${index}-horizontal-name` }>{ e.name }</p>
             {
               e.type === 'meal'
                 ? (
