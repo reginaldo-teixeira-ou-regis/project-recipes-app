@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 export default function Profile() {
-  const storage = JSON.parse(localStorage.getItem('user'));
+  const [storage, setStorage] = useState({ email: '' });
+  useEffect(() => {
+    const storaage = JSON.parse(localStorage.getItem('user'));
+    if (storaage) {
+      setStorage(storaage);
+    }
+  }, []);
   const history = useHistory();
-
   const handleClick = ({ target }) => {
     if (target.value === 'doneRecipes') {
       history.push('/done-recipes');

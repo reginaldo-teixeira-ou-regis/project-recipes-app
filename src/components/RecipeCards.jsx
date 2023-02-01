@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import useSearch from '../hooks/useSearch';
 import useFetch from '../hooks/useFetch';
 
 function RecipesCards() {
@@ -11,6 +12,7 @@ function RecipesCards() {
   const [sameButton, setSameButton] = useState('');
   const history = useHistory();
   const { makeFetch } = useFetch();
+  const { searching } = useSearch();
   const magicNumber12 = 12;
   const magicNumber5 = 5;
 
@@ -82,7 +84,7 @@ function RecipesCards() {
       >
         All
       </button>
-      { button ? filteredRecipes.map((element, index) => (
+      { searching === false && button ? filteredRecipes.map((element, index) => (
         index < magicNumber12 && (
           <li
             key={ element[`id${food}`] }

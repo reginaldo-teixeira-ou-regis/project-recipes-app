@@ -1,12 +1,16 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
+import useSearch from '../hooks/useSearch';
 
 export default function SearchBar() {
   const { handleChange, searchSelected, mealsAPI,
     drinksAPI, meals, drinks } = useContext(AppContext);
   const history = useHistory();
+  const { setSearching } = useSearch();
+
   const requestApiByTitl = async () => {
+    setSearching(true);
     if (history.location.pathname === '/meals') {
       await mealsAPI();
     }
@@ -27,6 +31,7 @@ export default function SearchBar() {
       }
     };
     verificaLength();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [meals, drinks]);
 
   // console.log(recipesFound);
