@@ -25,8 +25,16 @@ function RecipeInProgress() {
 
   useEffect(() => {
     fetchRecipeInProgress();
+    const inProgressRecipes = localStorage.getItem('inProgressRecipes');
+    if (inProgressRecipes) {
+      setCheckedIngredients(JSON.parse(inProgressRecipes));
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('inProgressRecipes', JSON.stringify(checkedIngredients));
+  }, [checkedIngredients]);
 
   return (
     <div>
@@ -62,7 +70,7 @@ function RecipeInProgress() {
                 <li key={ ingredientKey }>
                   <label
                     htmlFor={ `${index + 1}-ingredient-step` }
-                    data-testid={ `${index + 1}-ingredient-step` }
+                    data-testid={ `${index}-ingredient-step` }
                     className={
                       checkedIngredients.includes(ingredientKey) ? 'striked' : ''
                     }
@@ -70,8 +78,15 @@ function RecipeInProgress() {
                     <input
                       type="checkbox"
                       id={ `${index + 1}-ingredient-step` }
+                      checked={ checkedIngredients.includes(ingredientKey) }
                       onClick={ () => {
-                        setCheckedIngredients([...checkedIngredients, ingredientKey]);
+                        if (checkedIngredients.includes(ingredientKey)) {
+                          setCheckedIngredients(
+                            checkedIngredients.filter((key) => key !== ingredientKey),
+                          );
+                        } else {
+                          setCheckedIngredients([...checkedIngredients, ingredientKey]);
+                        }
                       } }
                     />
                     {recipe[ingredientKey]}
