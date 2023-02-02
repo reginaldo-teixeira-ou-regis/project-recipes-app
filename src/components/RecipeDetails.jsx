@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
+import '../css/carousel.css';
 import { useRouteMatch, useHistory } from 'react-router-dom';
-import Carousel from 'react-bootstrap/Carousel';
 import useFetch from '../hooks/useFetch';
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -18,6 +18,7 @@ function RecipeDetails() {
   const match = useRouteMatch();
   const { location: { pathname } } = history;
   const { params: { id } } = match;
+  const number = 6;
 
   const separateIngredients = () => {
     const mealsORdrink = pathname.includes('/meals') ? meals : drink;
@@ -42,7 +43,7 @@ function RecipeDetails() {
     const strArr = SrcYoutube.split('');
     const idArr = strArr.filter((l, i) => i > indexID);
     const idYou = idArr.join('');
-    console.log(idYou);
+    // console.log(idYou);
     setYoutubeId(idYou);
     // "https://www.youtube.com/embed/U9JYm5KSipM"
     // https://www.youtube.com/watch?v=VVnZd8A84z4
@@ -51,22 +52,21 @@ function RecipeDetails() {
     const fetchRecipesDT = async () => {
       if (pathname.includes('/meals')) {
         const mealsReq = await makeFetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
-        const recommendationMeals = await makeFetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
-        setRecommendationsMeals(recommendationMeals);
-        console.log(recommendationsMeals);
+        const recommendationMealss = await makeFetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+        setRecommendationsMeals(recommendationMealss.drinks);
         setMeals(mealsReq.meals);
       }
       if (pathname.includes('/drinks')) {
         const drinkReq = await makeFetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
-        const recommendationsDrink = await makeFetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
-        setRecommendationsDrinks(recommendationsDrink);
-        console.log(recommendationsDrinks);
+        const recommendationsDrinkss = await makeFetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+        setRecommendationsDrinks(recommendationsDrinkss.meals);
+        // console.log(recommendationsDrinks);
         setDrink(drinkReq.drinks);
       }
     };
     fetchRecipesDT();
   }, []);
-
+  console.log(recommendationsDrinks);
   useEffect(() => {
     const mealsORdrink = pathname.includes('/meals') ? meals : drink;
     if (mealsORdrink.length && mealsORdrink !== null) {
@@ -101,7 +101,7 @@ function RecipeDetails() {
             )) }
             <iframe
               data-testid="video"
-              width="560"
+              width="300"
               height="315"
               src={ `https://www.youtube.com/embed/${youtubeID}` }
               title="YouTube video player"
@@ -115,15 +115,6 @@ function RecipeDetails() {
               web-share"
               allowfullscreen
             />
-            <div>
-              <Carousel>
-                <Carousel.Item>
-                  <img
-                    data-testid={ `${index}-recommendation-card` }
-                  />
-                </Carousel.Item>
-              </Carousel>
-            </div>
           </div>
         ))
       ))}
@@ -150,6 +141,31 @@ function RecipeDetails() {
           </div>
         ))
       ))}
+      <div className="carousel-external">
+        {
+          recommendationsMeals.map((e, index) => (
+            index < number && (
+              <div className="carousel-itens" key={ index }>
+                <img
+                  alt="img"
+                  data-testid={ `${index}-recommendation-card` }
+                  src={ e.strDrinkThumb }
+                  width="150px"
+                />
+              </div>
+
+            )
+          ))
+        }
+      </div>
+      <div>
+        <button
+          data-testid="start-recipe-btn"
+          className="button-bottom"
+        >
+          Start Recipe
+        </button>
+      </div>
     </>
   );
 }
