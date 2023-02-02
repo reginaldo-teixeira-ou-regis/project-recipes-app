@@ -1,7 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useRouteMatch, useHistory } from 'react-router-dom';
+import Carousel from 'react-bootstrap/Carousel';
 import useFetch from '../hooks/useFetch';
+import 'bootstrap/dist/css/bootstrap.css';
 
 function RecipeDetails() {
   const { makeFetch } = useFetch();
@@ -113,6 +115,15 @@ function RecipeDetails() {
               web-share"
               allowfullscreen
             />
+            <div>
+              <Carousel>
+                <Carousel.Item>
+                  <img
+                    data-testid={ `${index}-recommendation-card` }
+                  />
+                </Carousel.Item>
+              </Carousel>
+            </div>
           </div>
         ))
       ))}
