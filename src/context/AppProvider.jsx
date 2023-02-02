@@ -9,6 +9,7 @@ function AppProvider({ children }) {
   const [recipesFound, setRecipesFound] = useState([]);
   const [meals, setMeals] = useState([]);
   const [drinks, setDrinks] = useState([]);
+  const [searching, setSearching] = useState(true);
   const { errors, isLoading, makeFetch } = useFetch();
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -22,21 +23,25 @@ function AppProvider({ children }) {
       console.log(fetchMeals);
       if (!fetchMeals.meals) {
         global.alert(alerta);
+        return;
       }
       setMeals(fetchMeals.meals);
     } if (searchSelected.searchSelected === 'name') {
       const fetchMeals = await makeFetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchSelected.typeSearch}`);
       if (!fetchMeals.meals) {
         global.alert(alerta);
+        return;
       }
       setMeals(fetchMeals.meals);
     } if (searchSelected.typeSearch.length > 1
       && searchSelected.searchSelected === 'letter') {
       global.alert('Your search must have only 1 (one) character');
+      return;
     } if (searchSelected.searchSelected === 'letter') {
       const fetchMeals = await makeFetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${searchSelected.typeSearch}`);
       if (fetchMeals.length === 0) {
         global.alert(alerta);
+        return;
       }
       setMeals(fetchMeals.meals);
     }
@@ -85,12 +90,15 @@ function AppProvider({ children }) {
     handleChange,
     mealsAPI,
     drinksAPI,
+    setSearching,
+    setRecipesFound,
+    searching,
     errors,
     isLoading,
     meals,
     drinks,
     recipesFound,
-  }), [searchSelected, meals, drinks, recipesFound]);
+  }), [searchSelected, meals, drinks, recipesFound, searching]);
 
   return (
     <AppContext.Provider value={ values }>
