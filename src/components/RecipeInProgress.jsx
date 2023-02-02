@@ -9,6 +9,7 @@ function RecipeInProgress() {
   const { id } = useParams();
   const { pathname } = useLocation();
   const mealsOrDrink = pathname.slice(1, number6);
+  /* const [checked, setChecked] = useState({}); */
 
   const fetchRecipeInProgress = async () => {
     if (mealsOrDrink === 'meals') {
@@ -26,6 +27,15 @@ function RecipeInProgress() {
     fetchRecipeInProgress();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  /* const handleChange = ({ target }) => {
+    const check = {
+
+      ...checked,
+      [target.name]: target.checked,
+    };
+    setChecked(check);
+  }; */
 
   return (
     <div>
@@ -52,6 +62,26 @@ function RecipeInProgress() {
           <p data-testid="instructions">
             {recipe.strInstructions}
           </p>
+          <h4 data-testid="recipe-ingredients-list-title">Ingredients:</h4>
+          <ul data-testid="recipe-ingredients-list">
+            {Object.keys(recipe)
+              .filter((key) => key.startsWith('strIngredient'))
+              .filter((key) => recipe[key])
+              .map((ingredientKey, index) => (
+                <li key={ ingredientKey }>
+                  <label
+                    htmlFor={ `${index + 1}-ingredient-step` }
+                    data-testid={ `${index + 1}-ingredient-step` }
+                  >
+                    <input
+                      type="checkbox"
+                      id={ `${index + 1}-ingredient-step` }
+                    />
+                    {recipe[ingredientKey]}
+                  </label>
+                </li>
+              ))}
+          </ul>
           <button data-testid="finish-recipe-btn" type="button">
             Finalizar Receita
           </button>
