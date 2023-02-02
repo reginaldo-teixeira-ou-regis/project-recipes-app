@@ -10,6 +10,8 @@ function RecipeDetails() {
   const [ingredients, setIngredients] = useState([]);
   const [mesures, setMesure] = useState([]);
   const [youtubeID, setYoutubeId] = useState('');
+  const [recommendationsMeals, setRecommendationsMeals] = useState([]);
+  const [recommendationsDrinks, setRecommendationsDrinks] = useState([]);
   const history = useHistory();
   const match = useRouteMatch();
   const { location: { pathname } } = history;
@@ -19,8 +21,8 @@ function RecipeDetails() {
     const mealsORdrink = pathname.includes('/meals') ? meals : drink;
     const arrEntries = Object.entries(mealsORdrink[0]);
     const EntriesIngredients = arrEntries.filter((f) => f[0].includes('strIngredient'));
-    const ingredientsInc = EntriesIngredients.map((el) => el[1]);
-    const ingredientsArr = ingredientsInc.filter((i) => i !== null && i !== '');
+    const ingredientsValue = EntriesIngredients.map((el) => el[1]);
+    const ingredientsArr = ingredientsValue.filter((i) => i !== null && i !== '');
     setIngredients(ingredientsArr);
   };
 
@@ -47,10 +49,16 @@ function RecipeDetails() {
     const fetchRecipesDT = async () => {
       if (pathname.includes('/meals')) {
         const mealsReq = await makeFetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+        const recommendationMeals = await makeFetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+        setRecommendationsMeals(recommendationMeals);
+        console.log(recommendationsMeals);
         setMeals(mealsReq.meals);
       }
       if (pathname.includes('/drinks')) {
         const drinkReq = await makeFetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+        const recommendationsDrink = await makeFetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+        setRecommendationsDrinks(recommendationsDrink);
+        console.log(recommendationsDrinks);
         setDrink(drinkReq.drinks);
       }
     };
