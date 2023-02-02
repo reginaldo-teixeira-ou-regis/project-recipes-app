@@ -55,12 +55,14 @@ function AppProvider({ children }) {
       console.log(fetchDrinks);
       if (!fetchDrinks.drinks) {
         global.alert(alerta);
+        return;
       }
       setDrinks(fetchDrinks.drinks);
     } if (searchSelected.searchSelected === 'name') {
       const fetchDrinks = await makeFetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchSelected.typeSearch}`);
       if (!fetchDrinks.drinks) {
         global.alert(alerta);
+        return;
       }
       setDrinks(fetchDrinks.drinks);
     } if (searchSelected.typeSearch.length > 1
@@ -70,6 +72,7 @@ function AppProvider({ children }) {
       const fetchDrinks = await makeFetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${searchSelected.typeSearch}`);
       if (!fetchDrinks.drinks) {
         global.alert(alerta);
+        return;
       }
       setDrinks(fetchDrinks.drinks);
     }
