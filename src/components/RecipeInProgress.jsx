@@ -9,7 +9,7 @@ function RecipeInProgress() {
   const { id } = useParams();
   const { pathname } = useLocation();
   const mealsOrDrink = pathname.slice(1, number6);
-  /* const [checked, setChecked] = useState({}); */
+  const [checkedIngredients, setCheckedIngredients] = useState([]);
 
   const fetchRecipeInProgress = async () => {
     if (mealsOrDrink === 'meals') {
@@ -27,15 +27,6 @@ function RecipeInProgress() {
     fetchRecipeInProgress();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  /* const handleChange = ({ target }) => {
-    const check = {
-
-      ...checked,
-      [target.name]: target.checked,
-    };
-    setChecked(check);
-  }; */
 
   return (
     <div>
@@ -72,10 +63,16 @@ function RecipeInProgress() {
                   <label
                     htmlFor={ `${index + 1}-ingredient-step` }
                     data-testid={ `${index + 1}-ingredient-step` }
+                    className={
+                      checkedIngredients.includes(ingredientKey) ? 'striked' : ''
+                    }
                   >
                     <input
                       type="checkbox"
                       id={ `${index + 1}-ingredient-step` }
+                      onClick={ () => {
+                        setCheckedIngredients([...checkedIngredients, ingredientKey]);
+                      } }
                     />
                     {recipe[ingredientKey]}
                   </label>
