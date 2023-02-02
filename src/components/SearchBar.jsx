@@ -1,13 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
-import useSearch from '../hooks/useSearch';
 
 export default function SearchBar() {
   const { handleChange, searchSelected, mealsAPI,
-    drinksAPI, meals, drinks } = useContext(AppContext);
+    drinksAPI, meals, drinks, setSearching } = useContext(AppContext);
   const history = useHistory();
-  const { setSearching } = useSearch();
 
   const requestApiByTitl = async () => {
     setSearching(true);
