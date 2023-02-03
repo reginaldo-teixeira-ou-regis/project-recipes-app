@@ -14,7 +14,10 @@ function RecipeDetails() {
   const [youtubeID, setYoutubeId] = useState('');
   const [recommendationsMeals, setRecommendationsMeals] = useState([]);
   const [recommendationsDrinks, setRecommendationsDrinks] = useState([]);
-  // const [receitasFeitas, setReceitasFeitas] = useState([]);
+  const [receitasFeitas, setReceitasFeitas] = useState([]);
+  const [receitasInProgress, setReceitasInProgress] = useState([]);
+  const [btnAtt, setBtnAtt] = useState(false);
+  const [btnAtt2, setBtnAtt2] = useState(false);
   const history = useHistory();
   const match = useRouteMatch();
   const { location: { pathname } } = history;
@@ -80,8 +83,24 @@ function RecipeDetails() {
 
   useEffect(() => {
     const storage = JSON.parse(localStorage.getItem('doneRecipes'));
+    const storageInProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
     setReceitasFeitas(storage);
+    setReceitasInProgress(storageInProgress);
   }, []);
+
+  console.log(history.location.pathname);
+  const attButton = () => {
+    const receitaDaPagina = history.location.pathname;
+    const idDaReceitaDaPagina = receitaDaPagina.split('/drinks/').join('');
+    const booleano = receitasFeitas.some((e) => e.id === idDaReceitaDaPagina);
+    const booleano2 = receitasInProgress.some((e) => e.id === idDaReceitaDaPagina);
+    if (booleano === true) {
+      setBtnAtt(true);
+    }
+    if (booleano2 === true) {
+      setBtnAtt2(true);
+    }
+  };
 
   return (
     <>
@@ -158,6 +177,7 @@ function RecipeDetails() {
                   src={ e.strDrinkThumb }
                   width="150px"
                 />
+                <p data-testid={ `${index}-recommendation-title` }>{ e.strDrink }</p>
               </div>
 
             )
@@ -166,26 +186,36 @@ function RecipeDetails() {
         {
           recommendationsDrinks.map((e, index) => (
             index < number && (
-              <div className="carousel-itens" key={ index }>
-                <img
-                  alt="img"
-                  data-testid={ `${index}-recommendation-card` }
-                  src={ e.strMealThumb }
-                  width="150px"
-                />
+              <div key={ index }>
+                <div className="carousel-itens">
+                  <img
+                    alt="img"
+                    data-testid={ `${index}-recommendation-card` }
+                    src={ e.strMealThumb }
+                    width="150px"
+                  />
+                </div>
+                <p data-testid={ `${index}-recommendation-title` }>{ e.strMeal }</p>
               </div>
             )
           ))
         }
       </div>
-      <div>
-        <button
-          data-testid="start-recipe-btn"
-          className="button-bottom"
-        >
-          Start Recipe
-        </button>
-      </div>
+      {
+        attButton
+      }
+      {
+        btnAtt === false && (
+          <div>
+            <button
+              data-testid="start-recipe-btn"
+              className="button-bottom"
+            >
+              { btnAtt2 === true ? 'Continue Recipe' : 'Start Recipe' }
+            </button>
+          </div>
+        )
+      }
     </>
   );
 }
