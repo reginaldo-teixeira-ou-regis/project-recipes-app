@@ -91,10 +91,10 @@ function RecipeDetails() {
   console.log(receitasInProgress);
   const attButton = () => {
     const receitaDaPagina = history.location.pathname;
-    const nameDaPagina = receitaDaPagina.split('/')[1];
     const idDaReceitaDaPagina = receitaDaPagina.split('/')[2];
     const booleano = receitasFeitas.some((e) => e.id === idDaReceitaDaPagina);
-    const receitasInProgressDrinks = Object.keys(receitasInProgress.drinks);
+    const receitasInProgressDrinks = Object.keys(receitasInProgress.drinks)
+      .some((e) => e === idDaReceitaDaPagina);
     const receitasInProgressMeals = Object.keys(receitasInProgress.meals)
       .some((e) => e === idDaReceitaDaPagina);
     if (booleano === true) {
@@ -106,6 +106,11 @@ function RecipeDetails() {
     if (receitasInProgressMeals === true) {
       setBtnAtt2(true);
     }
+  };
+
+  const mudaRota = () => {
+    const receitaDaPagina = history.location.pathname;
+    history.push(`${receitaDaPagina}/in-progress`);
   };
 
   return (
@@ -216,6 +221,7 @@ function RecipeDetails() {
             <button
               data-testid="start-recipe-btn"
               className="button-bottom"
+              onClick={ mudaRota }
             >
               { btnAtt2 === true ? 'Continue Recipe' : 'Start Recipe' }
             </button>
