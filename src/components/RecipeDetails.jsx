@@ -4,6 +4,9 @@ import '../css/carousel.css';
 import { useRouteMatch, useHistory } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 import 'bootstrap/dist/css/bootstrap.css';
+import shareIcon from '../images/shareIcon.svg';
+
+const copy = require('clipboard-copy');
 
 function RecipeDetails() {
   const { makeFetch } = useFetch();
@@ -18,6 +21,7 @@ function RecipeDetails() {
   const [receitasInProgress, setReceitasInProgress] = useState([]);
   const [btnAtt, setBtnAtt] = useState(false);
   const [btnAtt2, setBtnAtt2] = useState(false);
+  const [mensagem, setMensagem] = useState('');
   const history = useHistory();
   const match = useRouteMatch();
   const { location: { pathname } } = history;
@@ -47,7 +51,6 @@ function RecipeDetails() {
     const strArr = SrcYoutube.split('');
     const idArr = strArr.filter((l, i) => i > indexID);
     const idYou = idArr.join('');
-    // console.log(idYou);
     setYoutubeId(idYou);
     // "https://www.youtube.com/embed/U9JYm5KSipM"
     // https://www.youtube.com/watch?v=VVnZd8A84z4
@@ -64,13 +67,11 @@ function RecipeDetails() {
         const drinkReq = await makeFetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
         const recommendationsDrinkss = await makeFetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
         setRecommendationsDrinks(recommendationsDrinkss.meals);
-        // console.log(recommendationsDrinks);
         setDrink(drinkReq.drinks);
       }
     };
     fetchRecipesDT();
   }, []);
-  console.log(recommendationsDrinks);
   useEffect(() => {
     const mealsORdrink = pathname.includes('/meals') ? meals : drink;
     if (mealsORdrink.length && mealsORdrink !== null) {
@@ -111,6 +112,11 @@ function RecipeDetails() {
   const mudaRota = () => {
     const receitaDaPagina = history.location.pathname;
     history.push(`${receitaDaPagina}/in-progress`);
+  };
+
+  const copyUrl = (url) => {
+    copy(`http://localhost:3000/${url}`);
+    setMensagem('Link copied!');
   };
 
   return (
@@ -212,9 +218,7 @@ function RecipeDetails() {
           ))
         }
       </div>
-      {
-        attButton
-      }
+      { attButton }
       {
         btnAtt === false && (
           <div>
@@ -228,6 +232,18 @@ function RecipeDetails() {
           </div>
         )
       }
+      <button
+        type="button"
+        onClick={ () => copyUrl(history.location.pathname) }
+      >
+        <img
+          alt="shareIcon"
+          src={ shareIcon }
+          data-testid="share-btn"
+        />
+      </button>
+      <span>{ mensagem }</span>
+      <button type="button" data-testid="favorite-btn">Favoritar</button>
     </>
   );
 }
