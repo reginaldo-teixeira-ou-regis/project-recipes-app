@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 export default function Profile() {
-  const storage = JSON.parse(localStorage.getItem('user'));
+  const [storage, setStorage] = useState({ email: '' });
+  useEffect(() => {
+    const storaage = JSON.parse(localStorage.getItem('user'));
+    if (storaage) {
+      setStorage(storaage);
+    }
+  }, []);
   const history = useHistory();
-
   const handleClick = ({ target }) => {
     if (target.value === 'doneRecipes') {
       history.push('/done-recipes');
@@ -21,7 +26,7 @@ export default function Profile() {
     <div>
       <h4 data-testid="profile-email">{ storage.email }</h4>
       <button
-        onClick={ (e) => handleClick(e) }
+        onClick={ handleClick }
         name="buttonProfile"
         value="doneRecipes"
         type="button"
@@ -30,7 +35,7 @@ export default function Profile() {
         Done Recipes
       </button>
       <button
-        onClick={ (e) => handleClick(e) }
+        onClick={ handleClick }
         name="buttonProfile"
         value="favoriteRecipes"
         type="button"
@@ -39,7 +44,7 @@ export default function Profile() {
         Favorite Recipes
       </button>
       <button
-        onClick={ (e) => handleClick(e) }
+        onClick={ handleClick }
         name="buttonProfile"
         value="logout"
         type="button"
