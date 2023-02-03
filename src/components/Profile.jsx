@@ -22,6 +22,7 @@ export default function Profile() {
       history.push('/');
     }
   };
+
   return (
     <div>
       <h4 data-testid="profile-email">{ storage.email }</h4>
