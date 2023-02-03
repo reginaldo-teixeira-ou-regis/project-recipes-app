@@ -88,18 +88,22 @@ function RecipeDetails() {
     setReceitasInProgress(storageInProgress);
   }, []);
 
-  console.log(history.location.pathname.split('/')[1]);
+  console.log(receitasInProgress);
   const attButton = () => {
     const receitaDaPagina = history.location.pathname;
     const nameDaPagina = receitaDaPagina.split('/')[1];
     const idDaReceitaDaPagina = receitaDaPagina.split('/')[2];
     const booleano = receitasFeitas.some((e) => e.id === idDaReceitaDaPagina);
-    const receitasInProgressState = receitasInProgress[nameDaPagina].id
+    const receitasInProgressDrinks = Object.keys(receitasInProgress.drinks);
+    const receitasInProgressMeals = Object.keys(receitasInProgress.meals)
       .some((e) => e === idDaReceitaDaPagina);
     if (booleano === true) {
       setBtnAtt(true);
     }
-    if (receitasInProgressState === true) {
+    if (receitasInProgressDrinks === true) {
+      setBtnAtt2(true);
+    }
+    if (receitasInProgressMeals === true) {
       setBtnAtt2(true);
     }
   };
