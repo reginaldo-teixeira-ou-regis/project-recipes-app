@@ -59,7 +59,7 @@ function RecipesCards() {
 
   return (
     <div>
-      { recipeCategories.map((element, index) => (
+      { recipeCategories?.map((element, index) => (
         index < magicNumber5 && (
           <button
             key={ element.id }
@@ -78,7 +78,7 @@ function RecipesCards() {
       >
         All
       </button>
-      { button ? filteredRecipes.map((element, index) => (
+      { button ? filteredRecipes?.map((element, index) => (
         index < magicNumber12 && (
           <li
             style={ { listStyleType: 'none' } }
@@ -103,7 +103,7 @@ function RecipesCards() {
             </Link>
           </li>
         )
-      )) : recipesFound.map((element, index) => (
+      )) : recipesFound?.map((element, index) => (
         index < magicNumber12 && (
           <li
             style={ { listStyleType: 'none' } }
