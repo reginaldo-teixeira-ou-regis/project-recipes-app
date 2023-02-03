@@ -32,15 +32,20 @@ function RecipeInProgress() {
 
   useEffect(() => {
     fetchRecipeInProgress();
-    const inProgressRecipes = localStorage.getItem('inProgressRecipes');
-    if (inProgressRecipes) {
-      setCheckedIngredients(JSON.parse(inProgressRecipes));
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (!inProgressRecipes || !inProgressRecipes[mealsOrDrink][id]) {
+      localStorage.setItem('inProgressRecipes', '{}');
+    } else {
+      setCheckedIngredients(inProgressRecipes[mealsOrDrink][id]);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('inProgressRecipes', JSON.stringify(checkedIngredients));
+    const favoritesSeila = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    favoritesSeila[mealsOrDrink] = { [id]: checkedIngredients };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(favoritesSeila));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checkedIngredients]);
 
   useEffect(() => {
@@ -81,7 +86,13 @@ function RecipeInProgress() {
     setLinkCopied(true);
     setTimeout(() => setLinkCopied(false), oneSecond);
   };
-
+  if (!recipe) {
+    return <h3>Loading...</h3>;
+  }
+  const rrr = Object.keys(recipe)
+    .filter((key) => key.startsWith('strIngredient'))
+    .filter((key) => recipe[key]);
+  console.log(rrr);
   return (
     <div>
       {recipe && (
@@ -122,38 +133,43 @@ function RecipeInProgress() {
           </p>
           <h4 data-testid="recipe-ingredients-list-title">Ingredients:</h4>
           <ul data-testid="recipe-ingredients-list">
-            {Object.keys(recipe)
-              .filter((key) => key.startsWith('strIngredient'))
-              .filter((key) => recipe[key])
-              .map((ingredientKey, index) => (
-                <li key={ ingredientKey }>
+            {
+              rrr.map((ingredientKey, index) => (
+                <li key={ recipe[ingredientKey] }>
                   <label
                     htmlFor={ `${index + 1}-ingredient-step` }
                     data-testid={ `${index}-ingredient-step` }
                     className={
-                      checkedIngredients.includes(ingredientKey) ? 'striked' : ''
+                      checkedIngredients.includes(recipe[ingredientKey]) ? 'striked' : ''
                     }
                   >
                     <input
                       type="checkbox"
                       id={ `${index + 1}-ingredient-step` }
-                      checked={ checkedIngredients.includes(ingredientKey) }
+                      checked={ checkedIngredients.includes(recipe[ingredientKey]) }
                       onChange={ () => {
-                        if (checkedIngredients.includes(ingredientKey)) {
+                        if (checkedIngredients.includes(recipe[ingredientKey])) {
                           setCheckedIngredients(
-                            checkedIngredients.filter((key) => key !== ingredientKey),
+                            checkedIngredients
+                              .filter((key) => key !== recipe[ingredientKey]),
                           );
                         } else {
-                          setCheckedIngredients([...checkedIngredients, ingredientKey]);
+                          setCheckedIngredients([...checkedIngredients,
+                            recipe[ingredientKey]]);
                         }
                       } }
                     />
                     {recipe[ingredientKey]}
                   </label>
                 </li>
-              ))}
+              ))
+            }
           </ul>
-          <button data-testid="finish-recipe-btn" type="button">
+          <button
+            disabled={ rrr.length !== checkedIngredients.length }
+            data-testid="finish-recipe-btn"
+            type="button"
+          >
             Finalizar Receita
           </button>
         </>
