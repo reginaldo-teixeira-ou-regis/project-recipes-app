@@ -14,7 +14,7 @@ function RecipeDetails() {
   const [youtubeID, setYoutubeId] = useState('');
   const [recommendationsMeals, setRecommendationsMeals] = useState([]);
   const [recommendationsDrinks, setRecommendationsDrinks] = useState([]);
-  const [receitasFeitas, setReceitasFeitas] = useState([]);
+  // const [receitasFeitas, setReceitasFeitas] = useState([]);
   const history = useHistory();
   const match = useRouteMatch();
   const { location: { pathname } } = history;
@@ -163,8 +163,21 @@ function RecipeDetails() {
             )
           ))
         }
+        {
+          recommendationsDrinks.map((e, index) => (
+            index < number && (
+              <div className="carousel-itens" key={ index }>
+                <img
+                  alt="img"
+                  data-testid={ `${index}-recommendation-card` }
+                  src={ e.strMealThumb }
+                  width="150px"
+                />
+              </div>
+            )
+          ))
+        }
       </div>
-
       <div>
         <button
           data-testid="start-recipe-btn"
