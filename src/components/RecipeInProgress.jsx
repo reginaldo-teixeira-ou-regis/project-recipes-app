@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, useHistory } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import useFetch from '../hooks/useFetch';
 import shareIcon from '../images/shareIcon.svg';
@@ -17,6 +17,7 @@ function RecipeInProgress() {
   const [checkedIngredients, setCheckedIngredients] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
+  const history = useHistory();
 
   const fetchRecipeInProgress = async () => {
     if (mealsOrDrink === 'meals') {
@@ -42,9 +43,9 @@ function RecipeInProgress() {
   }, []);
 
   useEffect(() => {
-    const favoritesSeila = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    favoritesSeila[mealsOrDrink] = { [id]: checkedIngredients };
-    localStorage.setItem('inProgressRecipes', JSON.stringify(favoritesSeila));
+    const favoritesStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    favoritesStorage[mealsOrDrink] = { [id]: checkedIngredients };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(favoritesStorage));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checkedIngredients]);
 
@@ -60,10 +61,10 @@ function RecipeInProgress() {
 
   const toggleFavorite = ({ target }) => {
     setIsFavorite(!isFavorite);
-    const singular = mealsOrDrink.replace('s', '');
-    const obj = {
+    const singularMealsOrDrink = mealsOrDrink.replace('s', '');
+    const getDrindsAndMeals = {
       id,
-      type: singular,
+      type: singularMealsOrDrink,
       image: recipe.strDrinkThumb || recipe.strMealThumb,
       category: recipe.strCategory,
       alcoholicOrNot: recipe.strAlcoholic || '',
@@ -72,7 +73,7 @@ function RecipeInProgress() {
     };
     const savedFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (!isFavorite) {
-      savedFavorites.push(obj);
+      savedFavorites.push(getDrindsAndMeals);
       localStorage.setItem('favoriteRecipes', JSON.stringify(savedFavorites));
     } else {
       const index = savedFavorites.findIndex((el) => el === target.id);
@@ -86,13 +87,19 @@ function RecipeInProgress() {
     setLinkCopied(true);
     setTimeout(() => setLinkCopied(false), oneSecond);
   };
+
   if (!recipe) {
     return <h3>Loading...</h3>;
   }
-  const rrr = Object.keys(recipe)
+
+  const filteredIngredients = Object.keys(recipe)
     .filter((key) => key.startsWith('strIngredient'))
     .filter((key) => recipe[key]);
-  console.log(rrr);
+
+  const handleFinishedRecipe = () => {
+    history.push('/done-recipes');
+  };
+
   return (
     <div>
       {recipe && (
@@ -134,7 +141,7 @@ function RecipeInProgress() {
           <h4 data-testid="recipe-ingredients-list-title">Ingredients:</h4>
           <ul data-testid="recipe-ingredients-list">
             {
-              rrr.map((ingredientKey, index) => (
+              filteredIngredients.map((ingredientKey, index) => (
                 <li key={ recipe[ingredientKey] }>
                   <label
                     htmlFor={ `${index + 1}-ingredient-step` }
@@ -166,9 +173,10 @@ function RecipeInProgress() {
             }
           </ul>
           <button
-            disabled={ rrr.length !== checkedIngredients.length }
+            disabled={ filteredIngredients.length !== checkedIngredients.length }
             data-testid="finish-recipe-btn"
             type="button"
+            onClick={ handleFinishedRecipe }
           >
             Finalizar Receita
           </button>
