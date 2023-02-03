@@ -4,16 +4,6 @@ import App from '../App';
 import renderWithRouter from './helpers/renderWithRouter';
 
 describe('Testa o componente Recipes', () => {
-  // beforeEach(() => {
-  //   renderWithRouter(<App />);
-  //   const email = screen.getByTestId('email-input');
-  //   const password = screen.getByTestId('password-input');
-  //   const buttonEnt = screen.getByTestId('login-submit-btn');
-
-  //   userEvent.type(email, 'grupo10@gmail.com');
-  //   userEvent.type(password, '1234567');
-  //   userEvent.click(buttonEnt);
-  // });
   test('Verifica se há os botões de categoria na página meals e drinks', async () => {
     renderWithRouter(<App />);
     const email = screen.getByTestId('email-input');
