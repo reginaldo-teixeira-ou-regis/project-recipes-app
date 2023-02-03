@@ -14,6 +14,7 @@ function RecipeDetails() {
   const [youtubeID, setYoutubeId] = useState('');
   const [recommendationsMeals, setRecommendationsMeals] = useState([]);
   const [recommendationsDrinks, setRecommendationsDrinks] = useState([]);
+  const [receitasFeitas, setReceitasFeitas] = useState([]);
   const history = useHistory();
   const match = useRouteMatch();
   const { location: { pathname } } = history;
@@ -76,6 +77,11 @@ function RecipeDetails() {
       IdYoutube();
     }
   }, [meals, drink]);
+
+  useEffect(() => {
+    const storage = JSON.parse(localStorage.getItem('doneRecipes'));
+    setReceitasFeitas(storage);
+  }, []);
 
   return (
     <>
@@ -158,6 +164,7 @@ function RecipeDetails() {
           ))
         }
       </div>
+
       <div>
         <button
           data-testid="start-recipe-btn"
