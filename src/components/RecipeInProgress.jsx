@@ -14,6 +14,7 @@ function RecipeInProgress() {
   const { id } = useParams();
   const { pathname } = useLocation();
   const mealsOrDrink = pathname.slice(1, number6);
+  console.log(mealsOrDrink);
   const [checkedIngredients, setCheckedIngredients] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
@@ -34,11 +35,11 @@ function RecipeInProgress() {
   useEffect(() => {
     fetchRecipeInProgress();
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    console.log(inProgressRecipes);
     if (!inProgressRecipes || !inProgressRecipes[mealsOrDrink][id]) {
+      console.log('if');
       localStorage.setItem('inProgressRecipes', '{}');
-    } else {
-      setCheckedIngredients(inProgressRecipes[mealsOrDrink][id]);
-    }
+    } else { setCheckedIngredients(inProgressRecipes[mealsOrDrink][id]); }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -97,6 +98,20 @@ function RecipeInProgress() {
     .filter((key) => recipe[key]);
 
   const handleFinishedRecipe = () => {
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+    const singularMealsOrDrink = mealsOrDrink.replace('s', '');
+    doneRecipes.push({
+      id,
+      type: singularMealsOrDrink,
+      image: recipe.strDrinkThumb || recipe.strMealThumb,
+      category: recipe.strCategory,
+      alcoholicOrNot: recipe.strAlcoholic || '',
+      name: recipe.strMeal || recipe.strDrink,
+      nationality: recipe.strArea || '',
+      tags: recipe.strTags ? recipe.strTags.split(',') : [],
+      doneDate: new Date(),
+    });
+    localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
     history.push('/done-recipes');
   };
 
