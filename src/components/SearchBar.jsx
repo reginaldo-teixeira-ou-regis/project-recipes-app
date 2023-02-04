@@ -4,9 +4,11 @@ import AppContext from '../context/AppContext';
 
 export default function SearchBar() {
   const { handleChange, searchSelected, mealsAPI,
-    drinksAPI, meals, drinks } = useContext(AppContext);
+    drinksAPI, meals, drinks, setSearching } = useContext(AppContext);
   const history = useHistory();
+
   const requestApiByTitl = async () => {
+    setSearching(true);
     if (history.location.pathname === '/meals') {
       await mealsAPI();
     }

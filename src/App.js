@@ -4,10 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import Login from './pages/Login';
 import Drinks from './pages/Drinks';
-import Profile from './pages/Profile';
+import Profile from './pages/UserProfile';
 import AppProvider from './context/AppProvider';
 import DoneRecipes from './pages/DoneRecipes';
-import FavoriteRecipes from './pages/FavoriteRecipes';
+import FavoriteRecipes from './pages/FavoritesRecipes';
 import Recipes from './pages/Recipes';
 import RecipeInProgress from './components/RecipeInProgress';
 

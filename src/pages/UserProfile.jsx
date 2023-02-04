@@ -8,6 +8,7 @@ function ProfilePage() {
     <div>
       <Header
         title="Profile"
+        HasTheSearch={ false }
       />
       <Profile />
       <Footer />
