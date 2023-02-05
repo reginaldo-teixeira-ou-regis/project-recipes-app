@@ -66,10 +66,36 @@ describe('Testa o componente SearchBar', () => {
 
     const radio1letter = screen.getByTestId('first-letter-search-radio');
     const searchBtn = screen.getByTestId('exec-search-btn');
-    const searchInput = screen.getByPlaceholderText('Search');
+    const searchInput = screen.getByTestId('search-input');
 
     userEvent.type(searchInput, 'n');
     userEvent.click(radio1letter);
+    userEvent.click(searchBtn);
+
+    const negroni = await screen.findByRole('img', {
+      name: /Negroni/i,
+    });
+
+    expect(negroni).toBeInTheDocument();
+  });
+  test('Verifica se, ao buscar uma receita que só possui um resultado, redireciona para a tela de detalhes da receita da página Drinks', async () => {
+    renderWithRouter(<App />);
+    const buttonDrink = screen.getByTestId('drinks-bottom-btn');
+
+    userEvent.click(buttonDrink);
+
+    const searchIcon = screen.getByRole('img', {
+      name: /searchicon/i,
+    });
+
+    userEvent.click(searchIcon);
+
+    const radioName = screen.getByTestId('name-search-radio');
+    const searchBtn = screen.getByTestId('exec-search-btn');
+    const searchInput = screen.getByPlaceholderText('Search');
+
+    userEvent.type(searchInput, 'n');
+    userEvent.click(radioName);
     userEvent.click(searchBtn);
 
     const negroni = await screen.findByRole('img', {
