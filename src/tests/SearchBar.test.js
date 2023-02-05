@@ -65,8 +65,8 @@ describe('Testa o componente SearchBar', () => {
     userEvent.click(searchIcon);
 
     const radio1letter = screen.getByTestId('first-letter-search-radio');
+    const searchInput = screen.getByPlaceholderText('Search');
     const searchBtn = screen.getByTestId('exec-search-btn');
-    const searchInput = screen.getByTestId('search-input');
 
     userEvent.type(searchInput, 'n');
     userEvent.click(radio1letter);
@@ -79,7 +79,7 @@ describe('Testa o componente SearchBar', () => {
     expect(negroni).toBeInTheDocument();
   });
   test('Verifica se, ao buscar uma receita que só possui um resultado, redireciona para a tela de detalhes da receita da página Drinks', async () => {
-    renderWithRouter(<App />);
+    const { history } = renderWithRouter(<App />);
     const buttonDrink = screen.getByTestId('drinks-bottom-btn');
 
     userEvent.click(buttonDrink);
@@ -91,17 +91,40 @@ describe('Testa o componente SearchBar', () => {
     userEvent.click(searchIcon);
 
     const radioName = screen.getByTestId('name-search-radio');
-    const searchBtn = screen.getByTestId('exec-search-btn');
     const searchInput = screen.getByPlaceholderText('Search');
+    const searchBtn = screen.getByRole('button', {
+      name: Search,
+    });
 
-    userEvent.type(searchInput, 'n');
+    userEvent.type(searchInput, 'French Negroni');
     userEvent.click(radioName);
     userEvent.click(searchBtn);
 
-    const negroni = await screen.findByRole('img', {
-      name: /Negroni/i,
+    expect(history.location.pathname).toBe('/drinks/17248');
+  });
+
+  test('Verifica se, ao buscar uma receita que só possui um resultado, redireciona para a tela de detalhes da receita da página Recipes', async () => {
+    const { history } = renderWithRouter(<App />);
+    const buttonMeal = screen.getByTestId('meals-bottom-btn');
+
+    userEvent.click(buttonMeal);
+
+    const searchIcon = screen.getByRole('img', {
+      name: /searchicon/i,
     });
 
-    expect(negroni).toBeInTheDocument();
+    userEvent.click(searchIcon);
+
+    const radioName = screen.getByTestId('name-search-radio');
+    const searchInput = screen.getByPlaceholderText('Search');
+    const searchBtn = screen.getByRole('button', {
+      name: Search,
+    });
+
+    userEvent.type(searchInput, 'Corba');
+    userEvent.click(radioName);
+    userEvent.click(searchBtn);
+
+    expect(history.location.pathname).toBe('/meals/52977');
   });
 });
