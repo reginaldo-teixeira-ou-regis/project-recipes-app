@@ -94,8 +94,13 @@ function RecipeDetails() {
     setReceitasInProgress(storageInProgress);
     const receitaDaPagina = history.location.pathname;
     const idDaReceitaDaPagina = receitaDaPagina.split('/')[2];
-    const fav = storageFavorite?.some((e) => e.id === receitaDaPagina);
-    setIsFavorite(!fav);
+    const fav = storageFavorite?.some((e) => e.id === idDaReceitaDaPagina);
+    if (fav === true) {
+      setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
+    }
+
     // receitasFeitas?.map((e) => e.id === idDaReceitaDaPagina && setBtnAtt(true));
     // if (Object.keys(receitasInProgress).includes('meals')) {
     //  Object.keys(receitasInProgress.meals)
