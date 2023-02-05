@@ -89,10 +89,13 @@ function RecipeDetails() {
   useEffect(() => {
     const storage = JSON.parse(localStorage.getItem('doneRecipes'));
     const storageInProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const storageFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
     setReceitasFeitas(storage);
     setReceitasInProgress(storageInProgress);
-    // const receitaDaPagina = history.location.pathname;
-    // const idDaReceitaDaPagina = receitaDaPagina.split('/')[2];
+    const receitaDaPagina = history.location.pathname;
+    const idDaReceitaDaPagina = receitaDaPagina.split('/')[2];
+    const fav = storageFavorite?.some((e) => e.id === receitaDaPagina);
+    setIsFavorite(!fav);
     // receitasFeitas?.map((e) => e.id === idDaReceitaDaPagina && setBtnAtt(true));
     // if (Object.keys(receitasInProgress).includes('meals')) {
     //  Object.keys(receitasInProgress.meals)
