@@ -5,6 +5,8 @@ import { useRouteMatch, useHistory } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 import 'bootstrap/dist/css/bootstrap.css';
 import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 const copy = require('clipboard-copy');
 
@@ -12,6 +14,7 @@ function RecipeDetails() {
   const { makeFetch } = useFetch();
   const [meals, setMeals] = useState([]);
   const [drink, setDrink] = useState([]);
+  const [isFavorite, setIsFavorite] = useState(false);
   const [ingredients, setIngredients] = useState([]);
   const [mesures, setMesure] = useState([]);
   const [youtubeID, setYoutubeId] = useState('');
@@ -27,6 +30,7 @@ function RecipeDetails() {
   const { location: { pathname } } = history;
   const { params: { id } } = match;
   const number = 6;
+  const mealsOrDrink = pathname.slice(1, number);
 
   const separateIngredients = () => {
     const mealsORdrink = pathname.includes('/meals') ? meals : drink;
@@ -87,18 +91,17 @@ function RecipeDetails() {
     const storageInProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
     setReceitasFeitas(storage);
     setReceitasInProgress(storageInProgress);
-    const receitaDaPagina = history.location.pathname;
-    const idDaReceitaDaPagina = receitaDaPagina.split('/')[2];
-    storage?.map((e) => e.id === idDaReceitaDaPagina && setBtnAtt(true));
-    console.log(Object.keys(storageInProgress));
-    if (Object.keys(storageInProgress).includes('meals')) {
-      Object.keys(storageInProgress.meals)
-        .map((e) => e === idDaReceitaDaPagina && setBtnAtt2(true));
-    }
-    if (Object.keys(storageInProgress).includes('drinks')) {
-      Object.keys(storageInProgress.drinks)
-        .map((e) => e === idDaReceitaDaPagina && setBtnAtt2(true));
-    }
+    // const receitaDaPagina = history.location.pathname;
+    // const idDaReceitaDaPagina = receitaDaPagina.split('/')[2];
+    // receitasFeitas?.map((e) => e.id === idDaReceitaDaPagina && setBtnAtt(true));
+    // if (Object.keys(receitasInProgress).includes('meals')) {
+    //  Object.keys(receitasInProgress.meals)
+    //    .map((e) => e === idDaReceitaDaPagina && setBtnAtt2(true));
+    // }
+    // if (Object.keys(receitasInProgress).includes('drinks')) {
+    //  Object.keys(receitasInProgress.drinks)
+    //    .map((e) => e === idDaReceitaDaPagina && setBtnAtt2(true));
+  //  }
   }, []);
 
   const mudaRota = () => {
@@ -109,6 +112,52 @@ function RecipeDetails() {
   const copyUrl = (url) => {
     copy(`http://localhost:3000${url}`);
     setMensagem('Link copied!');
+  };
+
+  const toggleFavorite = ({ target }) => {
+    setIsFavorite(!isFavorite);
+    const singularMealsOrDrink = mealsOrDrink.replace('s', '');
+    if (singularMealsOrDrink === 'meal') {
+      const getDrindsAndMeals = {
+        id: meals[0].idMeal,
+        type: singularMealsOrDrink,
+        image: meals[0].strMealThumb,
+        category: meals[0].strCategory,
+        alcoholicOrNot: '',
+        name: meals[0].strMeal,
+        nationality: meals[0].strArea,
+      };
+      const savedFavorites = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+      if (!isFavorite) {
+        savedFavorites.push(getDrindsAndMeals);
+        localStorage.setItem('favoriteRecipes', JSON.stringify(savedFavorites));
+      } else {
+        const index = savedFavorites.findIndex((el) => el === target.id);
+        savedFavorites.splice(index, 1);
+        localStorage.setItem('favoriteRecipes', JSON.stringify(savedFavorites));
+      }
+    }
+    if (singularMealsOrDrink === 'drink') {
+      const getDrindsAndMeals = {
+        id: drink[0].idDrink,
+        type: singularMealsOrDrink,
+        image: drink[0].strDrinkThumb,
+        category: drink[0].strCategory,
+        alcoholicOrNot: drink[0].strAlcoholic,
+        name: drink[0].strDrink,
+        nationality: '',
+      };
+      const savedFavorites = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+      if (!isFavorite) {
+        savedFavorites.push(getDrindsAndMeals);
+        localStorage.setItem('favoriteRecipes', JSON.stringify(savedFavorites));
+      } else {
+        const index = savedFavorites.findIndex((el) => el === target.id);
+        savedFavorites.splice(index, 1);
+        localStorage.setItem('favoriteRecipes', JSON.stringify(savedFavorites));
+      }
+    }
+    console.log(getDrindsAndMeals);
   };
 
   return (
@@ -134,7 +183,14 @@ function RecipeDetails() {
                 data-testid="share-btn"
               />
             </button>
-            <button type="button" data-testid="favorite-btn">Favoritar</button>
+            <button type="button" onClick={ toggleFavorite }>
+              <img
+                data-testid="favorite-btn"
+                src={ isFavorite ? blackHeartIcon
+                  : whiteHeartIcon }
+                alt="whiteHeartIcon"
+              />
+            </button>
             <span>{ mensagem }</span>
             <p data-testid="instructions">{el.strInstructions}</p>
             { ingredients?.map((ingredient, indx) => (
@@ -185,7 +241,14 @@ function RecipeDetails() {
                 data-testid="share-btn"
               />
             </button>
-            <button type="button" data-testid="favorite-btn">Favoritar</button>
+            <button type="button" onClick={ toggleFavorite }>
+              <img
+                data-testid="favorite-btn"
+                src={ isFavorite ? blackHeartIcon
+                  : whiteHeartIcon }
+                alt="whiteHeartIcon"
+              />
+            </button>
             <span>{ mensagem }</span>
             { ingredients?.map((ingredient, indx) => (
               <ul key={ indx } data-testid={ `${indx}-ingredient-name-and-measure` }>
