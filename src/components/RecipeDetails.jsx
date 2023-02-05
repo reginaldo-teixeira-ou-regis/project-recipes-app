@@ -182,7 +182,6 @@ function RecipeDetails() {
             <h1 data-testid="recipe-title">{el.strMeal}</h1>
             <p data-testid="recipe-category">{el.strCategory}</p>
             <button
-              id={ el.id }
               type="button"
               onClick={ () => copyUrl(history.location.pathname) }
             >
@@ -192,7 +191,7 @@ function RecipeDetails() {
                 data-testid="share-btn"
               />
             </button>
-            <button type="button" onClick={ toggleFavorite }>
+            <button id={ el.id } type="button" onClick={ toggleFavorite }>
               <img
                 data-testid="favorite-btn"
                 src={ isFavorite ? blackHeartIcon
@@ -241,7 +240,6 @@ function RecipeDetails() {
             <h1 data-testid="recipe-title">{el.strDrink}</h1>
             <p data-testid="recipe-category">{el.strAlcoholic}</p>
             <button
-              id={ el.id }
               type="button"
               onClick={ () => copyUrl(history.location.pathname) }
             >
@@ -251,7 +249,7 @@ function RecipeDetails() {
                 data-testid="share-btn"
               />
             </button>
-            <button type="button" onClick={ toggleFavorite }>
+            <button id={ el.id } type="button" onClick={ toggleFavorite }>
               <img
                 data-testid="favorite-btn"
                 src={ isFavorite ? blackHeartIcon
