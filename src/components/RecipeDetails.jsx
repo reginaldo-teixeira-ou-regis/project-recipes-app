@@ -18,7 +18,7 @@ function RecipeDetails() {
   const [recommendationsMeals, setRecommendationsMeals] = useState([]);
   const [recommendationsDrinks, setRecommendationsDrinks] = useState([]);
   const [receitasFeitas, setReceitasFeitas] = useState([]);
-  const [receitasInProgress, setReceitasInProgress] = useState([]);
+  const [receitasInProgress, setReceitasInProgress] = useState({});
   const [btnAtt, setBtnAtt] = useState(false);
   const [btnAtt2, setBtnAtt2] = useState(false);
   const [mensagem, setMensagem] = useState('');
@@ -87,27 +87,19 @@ function RecipeDetails() {
     const storageInProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
     setReceitasFeitas(storage);
     setReceitasInProgress(storageInProgress);
-  }, []);
-
-  console.log(receitasInProgress);
-  const attButton = () => {
     const receitaDaPagina = history.location.pathname;
     const idDaReceitaDaPagina = receitaDaPagina.split('/')[2];
-    const booleano = receitasFeitas.some((e) => e.id === idDaReceitaDaPagina);
-    const receitasInProgressDrinks = Object.keys(receitasInProgress.drinks)
-      .some((e) => e === idDaReceitaDaPagina);
-    const receitasInProgressMeals = Object.keys(receitasInProgress.meals)
-      .some((e) => e === idDaReceitaDaPagina);
-    if (booleano === true) {
-      setBtnAtt(true);
+    storage?.map((e) => e.id === idDaReceitaDaPagina && setBtnAtt(true));
+    console.log(Object.keys(storageInProgress));
+    if (Object.keys(receitasInProgress).includes('meals')) {
+      Object.keys(receitasInProgress.meals)
+        .map((e) => e === idDaReceitaDaPagina && setBtnAtt2(true));
     }
-    if (receitasInProgressDrinks === true) {
-      setBtnAtt2(true);
+    if (Object.keys(receitasInProgress).includes('drinks')) {
+      Object.keys(receitasInProgress.drinks)
+        .map((e) => e === idDaReceitaDaPagina && setBtnAtt2(true));
     }
-    if (receitasInProgressMeals === true) {
-      setBtnAtt2(true);
-    }
-  };
+  }, []);
 
   const mudaRota = () => {
     const receitaDaPagina = history.location.pathname;
@@ -115,7 +107,7 @@ function RecipeDetails() {
   };
 
   const copyUrl = (url) => {
-    copy(`http://localhost:3000/${url}`);
+    copy(`http://localhost:3000${url}`);
     setMensagem('Link copied!');
   };
 
@@ -132,6 +124,18 @@ function RecipeDetails() {
             />
             <h1 data-testid="recipe-title">{el.strMeal}</h1>
             <p data-testid="recipe-category">{el.strCategory}</p>
+            <button
+              type="button"
+              onClick={ () => copyUrl(history.location.pathname) }
+            >
+              <img
+                alt="shareIcon"
+                src={ shareIcon }
+                data-testid="share-btn"
+              />
+            </button>
+            <button type="button" data-testid="favorite-btn">Favoritar</button>
+            <span>{ mensagem }</span>
             <p data-testid="instructions">{el.strInstructions}</p>
             { ingredients?.map((ingredient, indx) => (
               <ul key={ indx } data-testid={ `${indx}-ingredient-name-and-measure` }>
@@ -171,6 +175,18 @@ function RecipeDetails() {
             />
             <h1 data-testid="recipe-title">{el.strDrink}</h1>
             <p data-testid="recipe-category">{el.strAlcoholic}</p>
+            <button
+              type="button"
+              onClick={ () => copyUrl(history.location.pathname) }
+            >
+              <img
+                alt="shareIcon"
+                src={ shareIcon }
+                data-testid="share-btn"
+              />
+            </button>
+            <button type="button" data-testid="favorite-btn">Favoritar</button>
+            <span>{ mensagem }</span>
             { ingredients?.map((ingredient, indx) => (
               <ul key={ indx } data-testid={ `${indx}-ingredient-name-and-measure` }>
                 <li>
@@ -219,7 +235,6 @@ function RecipeDetails() {
           ))
         }
       </div>
-      { attButton }
       {
         btnAtt === false && (
           <div>
@@ -233,18 +248,6 @@ function RecipeDetails() {
           </div>
         )
       }
-      <button
-        type="button"
-        onClick={ () => copyUrl(history.location.pathname) }
-      >
-        <img
-          alt="shareIcon"
-          src={ shareIcon }
-          data-testid="share-btn"
-        />
-      </button>
-      <span>{ mensagem }</span>
-      <button type="button" data-testid="favorite-btn">Favoritar</button>
     </>
   );
 }
