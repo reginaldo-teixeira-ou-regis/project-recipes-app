@@ -187,16 +187,17 @@ function RecipeDetails() {
         {
           recommendationsMeals.map((e, index) => (
             index < number && (
-              <div className="carousel-itens" key={ index }>
-                <img
-                  alt="img"
-                  data-testid={ `${index}-recommendation-card` }
-                  src={ e.strDrinkThumb }
-                  width="150px"
-                />
+              <div key={ index }>
+                <div className="carousel-itens">
+                  <img
+                    alt="img"
+                    data-testid={ `${index}-recommendation-card` }
+                    src={ e.strDrinkThumb }
+                    width="150px"
+                  />
+                </div>
                 <p data-testid={ `${index}-recommendation-title` }>{ e.strDrink }</p>
               </div>
-
             )
           ))
         }
