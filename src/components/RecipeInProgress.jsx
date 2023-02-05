@@ -14,7 +14,6 @@ function RecipeInProgress() {
   const { id } = useParams();
   const { pathname } = useLocation();
   const mealsOrDrink = pathname.slice(1, number6);
-  console.log(mealsOrDrink);
   const [checkedIngredients, setCheckedIngredients] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
@@ -35,9 +34,7 @@ function RecipeInProgress() {
   useEffect(() => {
     fetchRecipeInProgress();
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    console.log(inProgressRecipes);
     if (!inProgressRecipes || !inProgressRecipes[mealsOrDrink][id]) {
-      console.log('if');
       localStorage.setItem('inProgressRecipes', '{}');
     } else { setCheckedIngredients(inProgressRecipes[mealsOrDrink][id]); }
   // eslint-disable-next-line react-hooks/exhaustive-deps
