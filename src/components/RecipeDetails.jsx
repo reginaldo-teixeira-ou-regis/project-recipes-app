@@ -91,12 +91,12 @@ function RecipeDetails() {
     const idDaReceitaDaPagina = receitaDaPagina.split('/')[2];
     storage?.map((e) => e.id === idDaReceitaDaPagina && setBtnAtt(true));
     console.log(Object.keys(storageInProgress));
-    if (Object.keys(receitasInProgress).includes('meals')) {
-      Object.keys(receitasInProgress.meals)
+    if (Object.keys(storageInProgress).includes('meals')) {
+      Object.keys(storageInProgress.meals)
         .map((e) => e === idDaReceitaDaPagina && setBtnAtt2(true));
     }
-    if (Object.keys(receitasInProgress).includes('drinks')) {
-      Object.keys(receitasInProgress.drinks)
+    if (Object.keys(storageInProgress).includes('drinks')) {
+      Object.keys(storageInProgress.drinks)
         .map((e) => e === idDaReceitaDaPagina && setBtnAtt2(true));
     }
   }, []);
