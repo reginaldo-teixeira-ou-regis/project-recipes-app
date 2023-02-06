@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
+import '../css/header.css';
 
-export default function SearchBar() {
+function SearchBar() {
   const { handleChange, searchSelected, mealsAPI,
     drinksAPI, meals, drinks, setSearching } = useContext(AppContext);
   const history = useHistory();
@@ -32,10 +33,10 @@ export default function SearchBar() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [meals, drinks]);
 
-  // console.log(recipesFound);
   return (
     <form>
       <input
+        id="search-input"
         type="text"
         placeholder="Search"
         name="typeSearch"
@@ -43,8 +44,8 @@ export default function SearchBar() {
         onChange={ handleChange }
         value={ searchSelected.typeSearch }
       />
-      <div>
-        <label htmlFor="ingredient">
+      <div id="radios">
+        <label htmlFor="ingredient" id="inputIngredient">
           Ingredients
           <input
             type="radio"
@@ -56,7 +57,7 @@ export default function SearchBar() {
           />
         </label>
 
-        <label htmlFor="name">
+        <label htmlFor="name" id="inputName">
           Name
           <input
             type="radio"
@@ -68,7 +69,7 @@ export default function SearchBar() {
           />
         </label>
 
-        <label htmlFor="First letter">
+        <label htmlFor="First letter" id="inputLetter">
           First Letter
           <input
             type="radio"
@@ -82,6 +83,7 @@ export default function SearchBar() {
       </div>
       <div>
         <button
+          id="exec-search-btn"
           type="button"
           data-testid="exec-search-btn"
           onClick={ () => requestApiByTitl() }
@@ -92,3 +94,5 @@ export default function SearchBar() {
     </form>
   );
 }
+
+export default SearchBar;

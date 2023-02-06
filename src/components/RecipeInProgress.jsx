@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { useLocation, useParams, useHistory } from 'react-router-dom';
 import copy from 'clipboard-copy';
@@ -5,6 +6,7 @@ import useFetch from '../hooks/useFetch';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import '../css/recipedetails.css';
 
 function RecipeInProgress() {
   const { makeFetch } = useFetch();
@@ -14,7 +16,6 @@ function RecipeInProgress() {
   const { id } = useParams();
   const { pathname } = useLocation();
   const mealsOrDrink = pathname.slice(1, number6);
-  console.log(mealsOrDrink);
   const [checkedIngredients, setCheckedIngredients] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
   const [linkCopied, setLinkCopied] = useState(false);
@@ -35,19 +36,15 @@ function RecipeInProgress() {
   useEffect(() => {
     fetchRecipeInProgress();
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    console.log(inProgressRecipes);
     if (!inProgressRecipes || !inProgressRecipes[mealsOrDrink][id]) {
-      console.log('if');
       localStorage.setItem('inProgressRecipes', '{}');
     } else { setCheckedIngredients(inProgressRecipes[mealsOrDrink][id]); }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     const favoritesStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
     favoritesStorage[mealsOrDrink] = { [id]: checkedIngredients };
     localStorage.setItem('inProgressRecipes', JSON.stringify(favoritesStorage));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checkedIngredients]);
 
   useEffect(() => {
@@ -57,7 +54,6 @@ function RecipeInProgress() {
     } else {
       localStorage.setItem('favoriteRecipes', JSON.stringify([]));
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const toggleFavorite = ({ target }) => {
@@ -123,12 +119,13 @@ function RecipeInProgress() {
             data-testid="recipe-photo"
             src={ recipe.strDrinkThumb || recipe.strMealThumb }
             alt="recipe"
-            width="300px"
+            className="recipesimg"
           />
           <h3 data-testid="recipe-title">
             {recipe.strDrink || recipe.strMeal}
           </h3>
           <button
+            className="recipeButtons"
             data-testid="share-btn"
             type="button"
             onClick={ () => copyUrl(window.location.href) }
@@ -136,6 +133,7 @@ function RecipeInProgress() {
             {linkCopied ? 'Link copied!' : <img src={ shareIcon } alt="shareIcon" />}
           </button>
           <button
+            className="recipeButtons"
             id={ id }
             type="button"
             onClick={ toggleFavorite }
@@ -150,11 +148,11 @@ function RecipeInProgress() {
           <h4 data-testid="recipe-category">
             {recipe.strCategory}
           </h4>
-          <p data-testid="instructions">
+          <p className="instructions" data-testid="instructions">
             {recipe.strInstructions}
           </p>
           <h4 data-testid="recipe-ingredients-list-title">Ingredients:</h4>
-          <ul data-testid="recipe-ingredients-list">
+          <ul className="ingredients" data-testid="recipe-ingredients-list">
             {
               filteredIngredients.map((ingredientKey, index) => (
                 <li key={ recipe[ingredientKey] }>

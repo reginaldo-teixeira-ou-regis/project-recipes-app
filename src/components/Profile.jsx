@@ -25,22 +25,29 @@ export default function Profile() {
 
   return (
     <div>
-      <h4 data-testid="profile-email">{ storage.email }</h4>
-      <button
-        onClick={ handleClick }
-        name="buttonProfile"
-        value="doneRecipes"
-        type="button"
-        data-testid="profile-done-btn"
-      >
-        Done Recipes
-      </button>
+      <div className="line" />
+      <div className="line2" />
+      <h4 data-testid="profile-email" className="profile-email">{ storage.email }</h4>
+      <div>
+        <button
+          onClick={ handleClick }
+          name="buttonProfile"
+          value="doneRecipes"
+          type="button"
+          data-testid="profile-done-btn"
+          className="profile-done-btn"
+        >
+          Done Recipes
+        </button>
+
+      </div>
       <button
         onClick={ handleClick }
         name="buttonProfile"
         value="favoriteRecipes"
         type="button"
         data-testid="profile-favorite-btn"
+        className="profile-favorite-btn"
       >
         Favorite Recipes
       </button>
@@ -50,6 +57,7 @@ export default function Profile() {
         value="logout"
         type="button"
         data-testid="profile-logout-btn"
+        className="profile-logout-btn"
       >
         Logout
       </button>

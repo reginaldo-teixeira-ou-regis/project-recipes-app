@@ -1,0 +1,53 @@
+body {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.filters {
+  background-color: rgba(233, 220, 42, 0.692);
+  border-radius: 5px;
+  margin: 2px;
+  padding: 3px;
+}
+
+.imgButton {
+  background-color: white;
+  border: none;
+  padding: 4px;
+}
+
+.imgButton img {
+  background-color: #421880;
+  border-radius: 5px;
+  padding: 2px;
+  width: 130px;
+}
+
+.imgButton p {
+  background-color: #421880;
+  border-radius: 5px;
+  color: white;
+}
+
+.cardCompleto {
+  display: flex;
+  flex-flow: wrap row;
+  width: 100%;
+}
+
+.card2 {
+  display: flex;
+  flex-direction: row;
+  width: 45%;
+}
+
+.share {
+  background-color: white;
+  border: none;
+}
+
+.share:hover {
+  background-color: rgb(238, 238, 6);
+  border-radius: 50px;
+}

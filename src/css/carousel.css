@@ -1,0 +1,32 @@
+.carousel-external {
+  align-self: center;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  justify-content: start;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  width: 90%;
+}
+
+.carousel-itens {
+  background-color: #421880;
+  border-radius: 5px;
+  display: flex;
+  margin-left: 3%;
+  padding: 2px;
+  width: 100%;
+}
+
+.itens-name {
+  background-color: #421880;
+  border-radius: 5px;
+  color: white;
+  margin-left: 5px;
+  text-align: center;
+}
+
+.button-bottom {
+  bottom: 0;
+  position: fixed;
+}

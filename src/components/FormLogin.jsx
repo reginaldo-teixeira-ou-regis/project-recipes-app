@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function FormLogin() {
   const [login, setLogin] = useState({ email: '', password: '' });
@@ -26,37 +27,53 @@ function FormLogin() {
   };
 
   return (
-    <form>
-      <label htmlFor="email">
-        <input
-          onChange={ handleChange }
-          value={ login.email }
-          type="email"
-          name="email"
-          data-testid="email-input"
-          placeholder="Digite seu Email"
-          className="input-group mb-3"
-        />
-      </label>
-      <label htmlFor="password">
-        <input
-          onChange={ handleChange }
-          value={ login.password }
-          type="password"
-          name="password"
-          data-testid="password-input"
-          placeholder="Digite sua senha"
-        />
-      </label>
-      <button
-        type="button"
-        data-testid="login-submit-btn"
-        disabled={ login.password.length <= MIN_PASSWORD || !(regex.test(login.email)) }
-        onClick={ handleSumit }
-      >
-        Enter
-      </button>
-    </form>
+    <div className="login">
+      <form className="cards">
+        <h2 className="card-headers">Login</h2>
+        <div className="card-content-area">
+          <label id="email" htmlFor="email">
+            Email
+            <input
+              onChange={ handleChange }
+              value={ login.email }
+              type="email"
+              name="email"
+              id="email"
+              data-testid="email-input"
+              placeholder="Digite seu Email"
+              className="input-group mb-3"
+            />
+          </label>
+
+        </div>
+        <div className="card-content-area">
+          <label id="password" htmlFor="password">
+            Password
+            <input
+              onChange={ handleChange }
+              value={ login.password }
+              type="password"
+              name="password"
+              id="password"
+              data-testid="password-input"
+              placeholder="Digite sua senha"
+            />
+          </label>
+        </div>
+        <div className="card-footer">
+          <button
+            type="button"
+            data-testid="login-submit-btn"
+            disabled={
+              login.password.length <= MIN_PASSWORD || !(regex.test(login.email))
+            }
+            onClick={ handleSumit }
+          >
+            Enter
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
 
