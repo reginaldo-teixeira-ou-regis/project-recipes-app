@@ -20,7 +20,6 @@ function AppProvider({ children }) {
     const alerta = 'Sorry, we haven\'t found any recipes for these filters.';
     if (searchSelected.searchSelected === 'ingredient') {
       const fetchMeals = await makeFetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${searchSelected.typeSearch}`);
-      console.log(fetchMeals);
       if (!fetchMeals.meals) {
         global.alert(alerta);
         return;
@@ -45,14 +44,12 @@ function AppProvider({ children }) {
       }
       setMeals(fetchMeals.meals);
     }
-    // return fetchMeals.meals;
   };
 
   const drinksAPI = async () => {
     const alerta = 'Sorry, we haven\'t found any recipes for these filters.';
     if (searchSelected.searchSelected === 'ingredient') {
       const fetchDrinks = await makeFetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${searchSelected.typeSearch}`);
-      console.log(fetchDrinks);
       if (!fetchDrinks.drinks) {
         global.alert(alerta);
         return;

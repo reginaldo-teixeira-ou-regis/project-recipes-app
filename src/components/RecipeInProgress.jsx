@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 import { useLocation, useParams, useHistory } from 'react-router-dom';
 import copy from 'clipboard-copy';
@@ -37,14 +38,12 @@ function RecipeInProgress() {
     if (!inProgressRecipes || !inProgressRecipes[mealsOrDrink][id]) {
       localStorage.setItem('inProgressRecipes', '{}');
     } else { setCheckedIngredients(inProgressRecipes[mealsOrDrink][id]); }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     const favoritesStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
     favoritesStorage[mealsOrDrink] = { [id]: checkedIngredients };
     localStorage.setItem('inProgressRecipes', JSON.stringify(favoritesStorage));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checkedIngredients]);
 
   useEffect(() => {
@@ -54,7 +53,6 @@ function RecipeInProgress() {
     } else {
       localStorage.setItem('favoriteRecipes', JSON.stringify([]));
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const toggleFavorite = ({ target }) => {

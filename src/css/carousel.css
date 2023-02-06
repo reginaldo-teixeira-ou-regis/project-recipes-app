@@ -1,0 +1,20 @@
+.carousel-external {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  justify-content: start;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  width: 90%;
+}
+
+.carousel-itens {
+  display: flex;
+  margin-left: 3%;
+  width: 40%;
+}
+
+.button-bottom {
+  bottom: 0;
+  position: fixed;
+}

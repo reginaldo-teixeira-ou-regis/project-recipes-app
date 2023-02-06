@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 
-export default function SearchBar() {
+function SearchBar() {
   const { handleChange, searchSelected, mealsAPI,
     drinksAPI, meals, drinks, setSearching } = useContext(AppContext);
   const history = useHistory();
@@ -32,7 +32,6 @@ export default function SearchBar() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [meals, drinks]);
 
-  // console.log(recipesFound);
   return (
     <form>
       <input
@@ -92,3 +91,5 @@ export default function SearchBar() {
     </form>
   );
 }
+
+export default SearchBar;
