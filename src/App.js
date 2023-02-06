@@ -12,7 +12,6 @@ import Recipes from './pages/Recipes';
 import RecipeDetails from './components/RecipeDetails';
 import RecipeInProgress from './components/RecipeInProgress';
 
-// mudei o componente renderizado nas linhas 25 e 26 de login para RecipeDetails
 function App() {
   return (
     <AppProvider>
