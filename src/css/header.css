@@ -1,0 +1,39 @@
+#headerpage {
+  background: hsl(50, 97%, 60%);
+  border: 1px solid rgba(0, 0, 0, 0.568);
+  border-radius: 10px;
+  height: 52px;
+  left: 0;
+  padding: 20px;
+  position: absolute;
+  top: 0;
+  width: 360px;
+}
+
+#profile-top-btn {
+  background: #421880;
+  border: 0.5px solid #421880;
+  border-radius: 5px;
+  bottom: 94.79%;
+  left: 5%;
+  position: absolute;
+  right: 5.91%;
+  top: 20%;
+}
+
+#search-top-btn {
+  background: #421880;
+  border-radius: 4px;
+  bottom: 94.89%;
+  left: 15%;
+  position: absolute;
+  right: 18.38%;
+  top: 20%;
+}
+
+#page-title {
+  height: 13.39px;
+  left: 140px;
+  position: absolute;
+  top: 10.78px;
+}

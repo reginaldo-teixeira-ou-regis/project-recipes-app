@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 import useFetch from '../hooks/useFetch';
+import '../css/recipes.css';
 
 function RecipesCards() {
   const { makeFetch } = useFetch();
@@ -58,7 +59,7 @@ function RecipesCards() {
   };
 
   return (
-    <div>
+    <>
       { recipeCategories.map((element, index) => (
         index < magicNumber5 && (
           <button
@@ -78,58 +79,71 @@ function RecipesCards() {
       >
         All
       </button>
-      { button ? filteredRecipes.map((element, index) => (
-        index < magicNumber12 && (
-          <li
-            style={ { listStyleType: 'none' } }
-            key={ element[`id${food}`] }
-          >
-            <Link
-              data-testid={ `${index}-recipe-card` }
-              to={ `/${food.toLowerCase()}s/${element[`id${food}`]}` }
+
+      <div
+        className="recipes"
+      >
+        { button ? filteredRecipes.map((element, index) => (
+          index < magicNumber12 && (
+            <li
+              className="columns"
+              style={ { listStyleType: 'none' } }
+              key={ element[`id${food}`] }
             >
-              <img
-                key={ element[`id${food}`] }
-                alt={ element[`str${food}`] }
-                data-testid={ `${index}-card-img` }
-                src={ element[`str${food}Thumb`] }
-                style={ { width: '200px' } }
-              />
-              <p
-                data-testid={ `${index}-card-name` }
+              <Link
+                className="column"
+                data-testid={ `${index}-recipe-card` }
+                to={ `/${food.toLowerCase()}s/${element[`id${food}`]}` }
               >
-                {element[`str${food}`]}
-              </p>
-            </Link>
-          </li>
-        )
-      )) : recipesFound.map((element, index) => (
-        index < magicNumber12 && (
-          <li
-            style={ { listStyleType: 'none' } }
-            key={ element[`id${food}`] }
-          >
-            <Link
-              data-testid={ `${index}-recipe-card` }
-              to={ `/${food.toLowerCase()}s/${element[`id${food}`]}` }
-            >
-              <img
+                <img
+                  key={ element[`id${food}`] }
+                  alt={ element[`str${food}`] }
+                  data-testid={ `${index}-card-img` }
+                  src={ element[`str${food}Thumb`] }
+                  style={ { width: '120px' } }
+                />
+                <p
+                  data-testid={ `${index}-card-name` }
+                >
+                  {element[`str${food}`]}
+                </p>
+              </Link>
+            </li>
+          )
+        ))
+          : recipesFound.map((element, index) => (
+            index < magicNumber12 && (
+              <ul
                 key={ element[`id${food}`] }
-                alt={ element[`str${food}`] }
-                data-testid={ `${index}-card-img` }
-                src={ element[`str${food}Thumb`] }
-                style={ { width: '200px' } }
-              />
-              <p
-                data-testid={ `${index}-card-name` }
               >
-                {element[`str${food}`]}
-              </p>
-            </Link>
-          </li>
-        )
-      )) }
-    </div>
+                <li
+                  className="columns"
+                  style={ { listStyleType: 'none' } }
+                >
+                  <Link
+                    data-testid={ `${index}-recipe-card` }
+                    to={ `/${food.toLowerCase()}s/${element[`id${food}`]}` }
+                  >
+                    <img
+                      className="recipesimg"
+                      key={ element[`id${food}`] }
+                      alt={ element[`str${food}`] }
+                      data-testid={ `${index}-card-img` }
+                      src={ element[`str${food}Thumb`] }
+                    />
+                    <p
+                      className="recipename"
+                      data-testid={ `${index}-card-name` }
+                    >
+                      {element[`str${food}`]}
+                    </p>
+                  </Link>
+                </li>
+              </ul>
+            )
+          )) }
+      </div>
+    </>
   );
 }
 

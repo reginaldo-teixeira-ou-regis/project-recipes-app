@@ -1,0 +1,16 @@
+.footer {
+  background: hsl(50, 97%, 60%);
+  bottom: 0;
+  color: black;
+  height: 52px;
+  position: absolute;
+  text-align: center;
+  top: 1100px;
+  width: 360px;
+
+
+  /* https://stackoverflow.com/questions/643879/
+        css-to-make-html-page-footer-stay-at-bottom-of-the-page-with-a-minimum-height-b */
+
+  /* example 3 */
+}
