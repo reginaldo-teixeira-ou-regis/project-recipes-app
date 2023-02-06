@@ -125,6 +125,7 @@ function RecipeInProgress() {
             {recipe.strDrink || recipe.strMeal}
           </h3>
           <button
+            className="recipeButtons"
             data-testid="share-btn"
             type="button"
             onClick={ () => copyUrl(window.location.href) }
@@ -132,6 +133,7 @@ function RecipeInProgress() {
             {linkCopied ? 'Link copied!' : <img src={ shareIcon } alt="shareIcon" />}
           </button>
           <button
+            className="recipeButtons"
             id={ id }
             type="button"
             onClick={ toggleFavorite }

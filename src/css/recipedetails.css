@@ -28,4 +28,14 @@
     border: 1px solid black;
     width: 90%;
   }
+
+  .recipeButtons {
+    background-color: white;
+    border: none;
+  }
+
+  .recipeButtons:hover {
+    background-color: rgb('238', '238', '6');
+    border-radius: 50px;
+  }
 }
