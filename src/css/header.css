@@ -1,0 +1,110 @@
+/* stylelint-disable selector-max-specificity */
+#headerpage {
+  background: hsl(50, 97%, 60%);
+  border: 1px solid rgba(0, 0, 0, 0.568);
+  border-radius: 10px;
+  height: 52px;
+  left: 0;
+  padding: 20px;
+  position: absolute;
+  top: 0;
+  width: 360px;
+}
+
+#profile-top-btn {
+  background: #421880;
+  border: 0.5px solid #421880;
+  border-radius: 5px;
+  bottom: 94.79%;
+  left: 5%;
+  position: absolute;
+  right: 5.91%;
+  top: 20%;
+}
+
+#search-top-btn {
+  background: #421880;
+  border-radius: 4px;
+  bottom: 94.89%;
+  left: 15%;
+  position: absolute;
+  right: 18.38%;
+  top: 20%;
+}
+
+#page-title {
+  height: 13.39px;
+  left: 140px;
+  position: absolute;
+  top: 10.78px;
+}
+
+#search-input {
+  background: white;
+  border: 1px solid #c6c4c4;
+  border-radius: 10px;
+  box-sizing: border-box;
+  height: 40px;
+  left: 11px;
+  position: absolute;
+  top: 60px;
+  width: 338px;
+}
+
+#radios {
+  background: #421880;
+  border-radius: 10px;
+  height: 88px;
+  left: 11px;
+  position: absolute;
+  top: 105px;
+  width: 338px;
+}
+
+#inputIngredient {
+  color: white;
+  font-family: Arial , sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  left: 35px;
+  line-height: 20px;
+  position: absolute;
+  top: 20px;
+}
+
+#inputName {
+  color: white;
+  font-family: Arial , sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  height: 9px;
+  left: 143px;
+  line-height: 9px;
+  position: absolute;
+  top: 20px;
+}
+
+#inputLetter {
+  color: white;
+  font-family: Arial , sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  height: 9px;
+  left: 215px;
+  line-height: 9px;
+  position: absolute;
+  top: 20px;
+}
+
+#exec-search-btn {
+  background: #f8c032;
+  border-radius: 5px;
+  color: #421880;
+  height: 25px;
+  left: 73.86px;
+  position: absolute;
+  top: 155px;
+  width: 208.16px;
+}

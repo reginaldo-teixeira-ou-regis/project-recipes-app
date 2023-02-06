@@ -9,6 +9,7 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import fetchRecipesDT from '../helpers/fetchRecipesDT';
 import Carousel from './Carousel';
+import '../css/recipedetails.css';
 
 const copy = require('clipboard-copy');
 
@@ -132,7 +133,7 @@ function RecipeDetails() {
             <img
               src={ el.strMealThumb }
               alt={ el.strMeal }
-              width="300px"
+              className="recipesimg"
               data-testid="recipe-photo"
             />
             <h1 data-testid="recipe-title">{el.strMeal}</h1>
@@ -156,14 +157,21 @@ function RecipeDetails() {
               />
             </button>
             <span>{ mensagem }</span>
-            <p data-testid="instructions">{el.strInstructions}</p>
-            { ingredients?.map((ingredient, indx) => (
-              <ul key={ indx } data-testid={ `${indx}-ingredient-name-and-measure` }>
-                <li>
-                  {`${mesures[indx]} ${ingredient}`}
-                </li>
-              </ul>
-            )) }
+            <p className="instructions" data-testid="instructions">
+              {el.strInstructions}
+            </p>
+            <div className="ingredients">
+              { ingredients?.map((ingredient, indx) => (
+                <ul
+                  key={ indx }
+                  data-testid={ `${indx}-ingredient-name-and-measure` }
+                >
+                  <li>
+                    {`${mesures[indx]} ${ingredient}`}
+                  </li>
+                </ul>
+              )) }
+            </div>
             <iframe
               data-testid="video"
               width="300"

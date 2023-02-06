@@ -1,0 +1,41 @@
+@media screen and ( max-width : 360px ) {
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  .recipesimg {
+    background-color: #421880;
+    border-radius: 5px;
+    padding: 2px;
+    width: 300px;
+  }
+
+  .recipename {
+    background-color: #421880;
+    border-radius: 5px;
+    color: white;
+  }
+
+  .instructions {
+    border: 1px solid black;
+    font-weight: 700;
+    width: 90%;
+  }
+
+  .ingredients {
+    border: 1px solid black;
+    width: 90%;
+  }
+
+  .recipeButtons {
+    background-color: white;
+    border: none;
+  }
+
+  .recipeButtons:hover {
+    background-color: rgb('238', '238', '6');
+    border-radius: 50px;
+  }
+}

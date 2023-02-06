@@ -6,6 +6,7 @@ import useFetch from '../hooks/useFetch';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import '../css/recipedetails.css';
 
 function RecipeInProgress() {
   const { makeFetch } = useFetch();
@@ -118,12 +119,13 @@ function RecipeInProgress() {
             data-testid="recipe-photo"
             src={ recipe.strDrinkThumb || recipe.strMealThumb }
             alt="recipe"
-            width="300px"
+            className="recipesimg"
           />
           <h3 data-testid="recipe-title">
             {recipe.strDrink || recipe.strMeal}
           </h3>
           <button
+            className="recipeButtons"
             data-testid="share-btn"
             type="button"
             onClick={ () => copyUrl(window.location.href) }
@@ -131,6 +133,7 @@ function RecipeInProgress() {
             {linkCopied ? 'Link copied!' : <img src={ shareIcon } alt="shareIcon" />}
           </button>
           <button
+            className="recipeButtons"
             id={ id }
             type="button"
             onClick={ toggleFavorite }
@@ -145,11 +148,11 @@ function RecipeInProgress() {
           <h4 data-testid="recipe-category">
             {recipe.strCategory}
           </h4>
-          <p data-testid="instructions">
+          <p className="instructions" data-testid="instructions">
             {recipe.strInstructions}
           </p>
           <h4 data-testid="recipe-ingredients-list-title">Ingredients:</h4>
-          <ul data-testid="recipe-ingredients-list">
+          <ul className="ingredients" data-testid="recipe-ingredients-list">
             {
               filteredIngredients.map((ingredientKey, index) => (
                 <li key={ recipe[ingredientKey] }>
