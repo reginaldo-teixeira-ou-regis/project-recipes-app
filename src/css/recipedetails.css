@@ -20,6 +20,7 @@
 
   .instructions {
     border: 1px solid black;
+    font-weight: 700;
     width: 90%;
   }
 

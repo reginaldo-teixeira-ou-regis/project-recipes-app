@@ -119,7 +119,7 @@ function RecipeInProgress() {
             data-testid="recipe-photo"
             src={ recipe.strDrinkThumb || recipe.strMealThumb }
             alt="recipe"
-            width="300px"
+            className="recipesimg"
           />
           <h3 data-testid="recipe-title">
             {recipe.strDrink || recipe.strMeal}
@@ -146,11 +146,11 @@ function RecipeInProgress() {
           <h4 data-testid="recipe-category">
             {recipe.strCategory}
           </h4>
-          <p data-testid="instructions">
+          <p className="instructions" data-testid="instructions">
             {recipe.strInstructions}
           </p>
           <h4 data-testid="recipe-ingredients-list-title">Ingredients:</h4>
-          <ul data-testid="recipe-ingredients-list">
+          <ul className="ingredients" data-testid="recipe-ingredients-list">
             {
               filteredIngredients.map((ingredientKey, index) => (
                 <li key={ recipe[ingredientKey] }>
