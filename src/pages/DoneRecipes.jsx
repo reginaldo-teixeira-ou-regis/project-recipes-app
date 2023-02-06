@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
+import '../css/doneRecipes.css';
 
 const copy = require('clipboard-copy');
 
@@ -58,43 +59,52 @@ function DoneRecipes() {
       >
         All
       </button>
-      { recipes.filter((recipe) => btnFilter.includes(recipe.type))
-        .map((recipe, index) => {
-          const tagsFood = showTags(recipe.tags, index);
-          return (
-            <div key={ index }>
-              <button
-                type="button"
-                onClick={ () => history.push(`/${recipe.type}s/${recipe.id}`) }
-              >
-                <img
-                  src={ recipe.image }
-                  alt="recipeImage"
-                  data-testid={ `${index}-horizontal-image` }
-                  style={ { width: '200px' } }
-                />
-                <p data-testid={ `${index}-horizontal-name` }>{ recipe.name }</p>
-              </button>
-              <p data-testid={ `${index}-horizontal-top-text` }>
-                {recipe.type === 'drink' ? recipe.alcoholicOrNot
-                  : `${recipe.nationality} - ${recipe.category}`}
-              </p>
-              <p data-testid={ `${index}-horizontal-done-date` }>{ recipe.doneDate }</p>
-              { tagsFood }
-              <button
-                type="button"
-                onClick={ () => copyUrlClipboard(`/${recipe.type}s/${recipe.id}`) }
-              >
-                <img
-                  src={ shareIcon }
-                  alt="shareIcon"
-                  data-testid={ `${index}-horizontal-share-btn` }
-                />
-              </button>
-              <span>{ recipesBoard }</span>
-            </div>
-          );
-        })}
+      <div>
+        { recipes.filter((recipe) => btnFilter.includes(recipe.type))
+          .map((recipe, index) => {
+            const tagsFood = showTags(recipe.tags, index);
+            return (
+              <div className="card-done-recipes" key={ index }>
+                <button
+                  type="button"
+                  onClick={ () => history.push(`/${recipe.type}s/${recipe.id}`) }
+                >
+                  <img
+                    src={ recipe.image }
+                    alt="recipeImage"
+                    data-testid={ `${index}-horizontal-image` }
+                    className="recipesimg"
+                  />
+                  <p
+                    className="recipename"
+                    data-testid={ `${index}-horizontal-name` }
+                  >
+                    {recipe.name}
+                  </p>
+                  {' '}
+                </button>
+                <p data-testid={ `${index}-horizontal-top-text` }>
+                  {recipe.type === 'drink' ? recipe.alcoholicOrNot
+                    : `${recipe.nationality} - ${recipe.category}`}
+                </p>
+                <p data-testid={ `${index}-horizontal-done-date` }>{ recipe.doneDate }</p>
+                { tagsFood }
+                <button
+                  className="btn-share"
+                  type="button"
+                  onClick={ () => copyUrlClipboard(`/${recipe.type}s/${recipe.id}`) }
+                >
+                  <img
+                    src={ shareIcon }
+                    alt="shareIcon"
+                    data-testid={ `${index}-horizontal-share-btn` }
+                  />
+                </button>
+                <span>{ recipesBoard }</span>
+              </div>
+            );
+          })}
+      </div>
     </div>
   );
 }
