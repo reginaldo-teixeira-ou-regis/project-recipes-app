@@ -22,6 +22,7 @@ export default function Profile() {
       history.push('/');
     }
   };
+
   return (
     <div>
       <div className="line" />
