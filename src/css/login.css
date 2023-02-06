@@ -1,0 +1,70 @@
+@media screen and ( max-width : 360px ) {
+
+  body {
+    margin: 0;
+  }
+
+  .login {
+    align-items: center;
+    background-color: #454d6b;
+    display: flex;
+    font-family: Georgia , Times , serif;
+    height: 100vh;
+    justify-content: center;
+  }
+
+  .cards {
+    background-color: rgba(19, 19, 19, 0.3);
+    border-radius: 2px;
+    color: rgb(215, 202, 202);
+    padding: 40px;
+    width: 280px;
+  }
+
+  .card-headers {
+    color: white;
+    margin-bottom: 50px;
+    opacity: 0.8;
+  }
+
+  .card-headers:after {
+    content: '______________';
+    display: block;
+    height: 1px;
+    margin-left: -5px;
+    margin-top: -17px;
+    width: 70px;
+
+  }
+
+  .card-content-area {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+
+  }
+
+  .card-content-area input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #e1e1e1;
+    color: white;
+    margin-top: 10px;
+    padding: 0 5px;
+  }
+
+  .card-footer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-footer button {
+    background-color: #a13854;
+    border: none;
+    color: #e1e1e1;
+    height: 40px;
+    margin: 10px 0;
+    width: 100%;
+  }
+
+}
