@@ -3,9 +3,8 @@
   bottom: 0;
   color: black;
   height: 52px;
-  position: absolute;
+  position: fixed;
   text-align: center;
-  top: 1100px;
   width: 360px;
 
 

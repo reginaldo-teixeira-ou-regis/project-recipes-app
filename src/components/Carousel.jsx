@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import '../css/carousel.css';
 
 const number = 6;
 
@@ -18,7 +19,12 @@ function Carousel({ recommendationsDrinks, recommendationsMeals }) {
                   width="150px"
                 />
               </div>
-              <p data-testid={ `${index}-recommendation-title` }>{ e.strDrink }</p>
+              <p
+                className="itens-name"
+                data-testid={ `${index}-recommendation-title` }
+              >
+                { e.strDrink }
+              </p>
             </div>
           )
         ))

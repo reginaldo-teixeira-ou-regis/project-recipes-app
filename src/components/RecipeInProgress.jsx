@@ -6,6 +6,7 @@ import useFetch from '../hooks/useFetch';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import '../css/recipedetails.css';
 
 function RecipeInProgress() {
   const { makeFetch } = useFetch();

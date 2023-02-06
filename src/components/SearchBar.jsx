@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import AppContext from '../context/AppContext';
+import '../css/header.css';
 
 function SearchBar() {
   const { handleChange, searchSelected, mealsAPI,
@@ -35,6 +36,7 @@ function SearchBar() {
   return (
     <form>
       <input
+        id="search-input"
         type="text"
         placeholder="Search"
         name="typeSearch"
@@ -42,8 +44,8 @@ function SearchBar() {
         onChange={ handleChange }
         value={ searchSelected.typeSearch }
       />
-      <div>
-        <label htmlFor="ingredient">
+      <div id="radios">
+        <label htmlFor="ingredient" id="inputIngredient">
           Ingredients
           <input
             type="radio"
@@ -55,7 +57,7 @@ function SearchBar() {
           />
         </label>
 
-        <label htmlFor="name">
+        <label htmlFor="name" id="inputName">
           Name
           <input
             type="radio"
@@ -67,7 +69,7 @@ function SearchBar() {
           />
         </label>
 
-        <label htmlFor="First letter">
+        <label htmlFor="First letter" id="inputLetter">
           First Letter
           <input
             type="radio"
@@ -81,6 +83,7 @@ function SearchBar() {
       </div>
       <div>
         <button
+          id="exec-search-btn"
           type="button"
           data-testid="exec-search-btn"
           onClick={ () => requestApiByTitl() }

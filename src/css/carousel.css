@@ -1,4 +1,5 @@
 .carousel-external {
+  align-self: center;
   display: flex;
   flex-direction: row;
   gap: 30px;
@@ -9,9 +10,20 @@
 }
 
 .carousel-itens {
+  background-color: #421880;
+  border-radius: 5px;
   display: flex;
   margin-left: 3%;
-  width: 40%;
+  padding: 2px;
+  width: 100%;
+}
+
+.itens-name {
+  background-color: #421880;
+  border-radius: 5px;
+  color: white;
+  margin-left: 5px;
+  text-align: center;
 }
 
 .button-bottom {

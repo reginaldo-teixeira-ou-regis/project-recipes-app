@@ -1,0 +1,30 @@
+@media screen and ( max-width : 360px ) {
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  .recipesimg {
+    background-color: #421880;
+    border-radius: 5px;
+    padding: 2px;
+    width: 300px;
+  }
+
+  .recipename {
+    background-color: #421880;
+    border-radius: 5px;
+    color: white;
+  }
+
+  .instructions {
+    border: 1px solid black;
+    width: 90%;
+  }
+
+  .ingredients {
+    border: 1px solid black;
+    width: 90%;
+  }
+}
