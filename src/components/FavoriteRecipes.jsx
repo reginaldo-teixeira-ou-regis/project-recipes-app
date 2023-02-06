@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import '../css/favoriteRecipes.css';
 
 const copy = require('clipboard-copy');
 
@@ -47,6 +48,7 @@ export default function FavoriteRecipes() {
   return (
     <div>
       <button
+        className="filters"
         onClick={ filters }
         name="All"
         type="button"
@@ -55,6 +57,7 @@ export default function FavoriteRecipes() {
         All
       </button>
       <button
+        className="filters"
         onClick={ filters }
         name="Meals"
         type="button"
@@ -63,6 +66,7 @@ export default function FavoriteRecipes() {
         Meal
       </button>
       <button
+        className="filters"
         onClick={ filters }
         name="Drinks"
         type="button"
@@ -70,63 +74,73 @@ export default function FavoriteRecipes() {
       >
         Drink
       </button>
-      {
-        itensDoStorage?.map((e, index) => (
-          <div key={ e.id }>
-            <button
-              type="button"
-              onClick={ () => history.push(`/${e.type}s/${e.id}`) }
-              style={ { border: 'none', backgroundColor: 'white' } }
-            >
-              <img
-                data-testid={ `${index}-horizontal-image` }
-                alt={ e.name }
-                src={ e.image }
-                style={ { width: '200px' } }
-              />
-              <p
-                data-testid={ `${index}-horizontal-name` }
+      <div className="cardCompleto">
+        {
+          itensDoStorage?.map((e, index) => (
+            <div className="cards2" key={ e.id }>
+              <button
+                className="imgButton"
+                type="button"
+                onClick={ () => history.push(`/${e.type}s/${e.id}`) }
               >
-                { e.name }
-              </p>
+                <img
+                  data-testid={ `${index}-horizontal-image` }
+                  alt={ e.name }
+                  src={ e.image }
+                />
+                <p
+                  data-testid={ `${index}-horizontal-name` }
+                >
+                  { e.name }
+                  <p data-testid={ `${index}-horizontal-top-text` }>{ e.category }</p>
+                </p>
 
-            </button>
-            <p data-testid={ `${index}-horizontal-top-text` }>{ e.category }</p>
-            {
-              e.type === 'meal'
-                ? (
-                  <p
-                    data-testid={ `${index}-horizontal-top-text` }
-                  >
-                    { `${e.nationality} - ${e.category}` }
-                  </p>
-                )
-                : (
-                  <p
-                    data-testid={ `${index}-horizontal-top-text` }
-                  >
-                    { e.alcoholicOrNot }
-                  </p>
-                )
-            }
-            <button onClick={ () => copyUrl(`/${e.type}s/${e.id}`) } type="button">
-              <img
-                alt="shareIcon"
-                src={ shareIcon }
-                data-testid={ `${index}-horizontal-share-btn` }
-              />
-            </button>
-            <span>{ mensagem }</span>
-            <button onClick={ () => attLocalStorage(e.id) } type="button">
-              <img
-                data-testid={ `${index}-horizontal-favorite-btn` }
-                alt="favoriteIcon"
-                src={ blackHeartIcon }
-              />
-            </button>
-          </div>
-        ))
-      }
+              </button>
+              {
+                e.type === 'meal'
+                  ? (
+                    <p
+                      data-testid={ `${index}-horizontal-top-text` }
+                    >
+                      { `${e.nationality} - ${e.category}` }
+                    </p>
+                  )
+                  : (
+                    <p
+                      data-testid={ `${index}-horizontal-top-text` }
+                    >
+                      { e.alcoholicOrNot }
+                    </p>
+                  )
+              }
+              <button
+                className="share"
+                onClick={ () => copyUrl(`/${e.type}s/${e.id}`) }
+                type="button"
+              >
+                <img
+                  alt="shareIcon"
+                  src={ shareIcon }
+                  data-testid={ `${index}-horizontal-share-btn` }
+                />
+              </button>
+              <span>{ mensagem }</span>
+              <button
+                onClick={ () => attLocalStorage(e.id) }
+                type="button"
+                className="share"
+              >
+                <img
+                  data-testid={ `${index}-horizontal-favorite-btn` }
+                  alt="favoriteIcon"
+                  src={ blackHeartIcon }
+                />
+              </button>
+            </div>
+          ))
+        }
+
+      </div>
     </div>
   );
 }
