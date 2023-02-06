@@ -1,0 +1,94 @@
+@media screen and ( max-width : 360px ) {
+
+  .profile-email {
+    color: #191a1b;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    height: 12px;
+    left: 44px;
+    line-height: 16px;
+    position: absolute;
+    text-align: center;
+    top: 188px;
+    width: 273px;
+  }
+
+  .profile-done-btn {
+    align-items: center;
+    background-color: white;
+    border: none;
+    color: #0f0f0f;
+    display: flex;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    height: 16px;
+    left: 119px;
+    letter-spacing: 0.1em;
+    line-height: 16px;
+    position: absolute;
+    text-transform: capitalize;
+    top: 273px;
+    width: 156px;
+  }
+
+  .profile-favorite-btn {
+    align-items: center;
+    background-color: white;
+    border: none;
+    color: #0f0f0f;
+    display: flex;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    height: 16px;
+    left: 119px;
+    letter-spacing: 0.1em;
+    line-height: 16px;
+    position: absolute;
+    text-transform: capitalize;
+    top: 359px;
+    width: 156px;
+  }
+
+  .profile-logout-btn {
+    align-items: center;
+    background-color: white;
+    border: none;
+    color: #0f0f0f;
+    display: flex;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    height: 16px;
+    left: 119px;
+    letter-spacing: 0.1em;
+    line-height: 16px;
+    position: absolute;
+    text-transform: capitalize;
+    top: 445px;
+    width: 156px;
+  }
+
+
+  .line {
+    border: 0.5px solid grey;
+    height: 0;
+    left: 36px;
+    position: absolute;
+    top: 325px;
+    width: 290px;
+
+  }
+
+  .line2 {
+    border: 0.5px solid grey;
+    height: 0;
+    left: 36px;
+    position: absolute;
+    top: 409px;
+    width: 290px;
+  }
+
+}
